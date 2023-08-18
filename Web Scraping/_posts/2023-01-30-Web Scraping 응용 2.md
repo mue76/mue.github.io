@@ -1879,3 +1879,4 @@ driver.quit()
 ## Reference
 - [웹 크롤링 & 데이터 분석 with 파이썬 (장철원 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=286684632)
 - [데이터 분석을 위한 파이썬 철저 입문 (최은석 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=189403433)
+- [인프런 파이썬 무료 강의 (활용편3) - 웹 스크래핑 (5시간)](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%9B%B9-%EC%8A%A4%ED%81%AC%EB%9E%98%ED%95%91)
