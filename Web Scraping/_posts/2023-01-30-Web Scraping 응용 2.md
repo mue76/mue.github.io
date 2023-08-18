@@ -1,7 +1,7 @@
 ---
-tag: [python, 웹스크래핑, Beautifulsoup, Selenium]
+tag: [python, 웹스크래핑, BeautifulSoup, Selenium]
 ---
-# Selenium을 이용한 Web Scraping
+# Selenium을 이용한 Web scraping
 
 **셀레니움**
 - 웹페이지 테스트 자동화를 할 수 있는 프레임워크

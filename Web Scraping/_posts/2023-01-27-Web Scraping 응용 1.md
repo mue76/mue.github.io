@@ -1,7 +1,7 @@
 ---
 tag: [python, 웹스크래핑, BeautifulSoup]
 ---
-# Naver, Daum 사이트에서 Web Scraping 하기
+# Naver, Daum 사이트에서 Web scraping 하기
 
 **requests 모듈**
 - 참고 사이트 : https://realpython.com/python-requests/
