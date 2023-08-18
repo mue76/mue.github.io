@@ -38,7 +38,7 @@ Image('./images/graph2.png')
 
 
     
-![png](/assets/images/output_5_0.png)
+![png](/assets/images2/output_5_0.png)
     
 
 
