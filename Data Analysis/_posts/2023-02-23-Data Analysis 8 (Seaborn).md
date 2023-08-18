@@ -1101,3 +1101,4 @@ Image('./images/seaborn2.png')
 ## Reference
 - [파이썬 라이브러리를 활용한 데이터 분석 (웨스 맥키니 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=315354750)
 - [Must Have 머신러닝·딥러닝 문제해결 전략 (신백균 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=292510407)
+- [파이썬 머신러닝 완벽 가이드 (권철민 저)](https://www.inflearn.com/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EC%99%84%EB%B2%BD%EA%B0%80%EC%9D%B4%EB%93%9C#)
