@@ -1,3 +1,6 @@
+---
+tag: [python, 웹스크래핑, BeautifulSoup]
+---
 # 웹 크롤링의 기초개념
 
 **웹 크롤링 vs 웹 스크래핑**
@@ -473,7 +476,7 @@ heading.onclick = function() {
 from bs4 import BeautifulSoup
 ```
 
-### Workshop 1
+### 실습 1
 
 
 ```python
@@ -577,7 +580,7 @@ soup.find('head')
 
 
 
-### Workshop 2
+### 실습 2
 
 
 ```python
@@ -682,7 +685,7 @@ for li in lis:
      세번째 목록
     
 
-### Workshop 3
+### 실습 3
 
 
 ```python
@@ -877,7 +880,7 @@ table2.find_previous_siblings()
 
 
 
-### Workshop 4
+### 실습 4
 
 
 ```python
@@ -1507,3 +1510,7 @@ soup.a['href'], soup.a['class'], soup.a['id']
     ('http://www.naver.com', ['portal'], 'naver')
 
 
+## Reference
+## Reference
+- [웹 크롤링 & 데이터 분석 with 파이썬 (장철원 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=286684632)
+- [데이터 분석을 위한 파이썬 철저 입문 (최은석 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=189403433)

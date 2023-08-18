@@ -1,3 +1,8 @@
+---
+tag: [python, 웹스크래핑, Beautifulsoup, Selenium]
+---
+# Selenium을 이용한 Web Scraping
+
 **셀레니움**
 - 웹페이지 테스트 자동화를 할 수 있는 프레임워크
 - 셀레니움 사용하면 완전한 형태의 웹 페이지 소스를 볼 수 있기 때문에 스크래핑할 때 유용
@@ -289,7 +294,7 @@ elem.click()
 driver.quit()
 ```
 
-### Workshop 1
+### 실습 1
 **네이버 로그인**
 
 
@@ -335,7 +340,7 @@ elem.click()
 driver.quit()
 ```
 
-### Workshop 2
+### 실습 2
 
 **구글 이미지 검색**
 
@@ -611,7 +616,7 @@ driver.quit()
     response 예외 발생 403 Client Error: Forbidden for url: https://dmzfarm.com/web/product/big/201611/78_shop1_157279.jpg?User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F109.0.0.0+Safari%2F537.36 15
     
 
-### Workshop 3
+### 실습 3
 
 **구글 무비**
 - https://play.google.com/store/movies/top
@@ -1870,3 +1875,7 @@ driver.quit()
 ```python
 
 ```
+## Reference
+## Reference
+- [웹 크롤링 & 데이터 분석 with 파이썬 (장철원 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=286684632)
+- [데이터 분석을 위한 파이썬 철저 입문 (최은석 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=189403433)

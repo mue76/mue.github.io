@@ -1,3 +1,8 @@
+---
+tag: [python, 웹스크래핑, BeautifulSoup]
+---
+# Naver, Daum 사이트에서 Web Scraping 하기
+
 **requests 모듈**
 - 참고 사이트 : https://realpython.com/python-requests/
 
@@ -98,7 +103,7 @@ with open('mygoogle2.html', 'w', encoding='utf8') as fd:
 
 ```
 
-### Workshop 1
+### 실습 1
 
 **네이버 웹툰** 
 - https://comic.naver.com/webtoon/weekday
@@ -9904,7 +9909,7 @@ for page in range(1, 22): # page가 1~21까지 변하도록 만듬
     
     
 
-### Workshop 2
+### 실습 2
 
 **다음(daum.net)에서 2022년 영화순위 검색**
 - https://search.daum.net/search?w=tot&q=2022%EB%85%84%EC%98%81%ED%99%94%EC%88%9C%EC%9C%84&DA=MOR&rtmaxcoll=MOR
@@ -10321,3 +10326,6 @@ for year in range(2022, 2011, -1):
       fd.write(response.content)
 
 ```
+## Reference
+- [웹 크롤링 & 데이터 분석 with 파이썬 (장철원 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=286684632)
+- [데이터 분석을 위한 파이썬 철저 입문 (최은석 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=189403433)
