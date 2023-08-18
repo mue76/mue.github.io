@@ -1,44 +1,13 @@
-# 파일 사용하기
+---
+tag: [python, 기초코딩]
+---
+# 파일과 함수
+
+## 파일 사용하기
 
 - 파일객체 = open('파일이름', '파일모드')
 - 파일객체.write('문자열')
 - 파일객체.close()
-
-
-```python
-%pwd
-```
-
-
-
-
-    'C:\\Users\\Playdata\\Documents\\데이터 분석 28기\\Python Programming'
-
-
-
-
-```python
-!dir
-```
-
-     C 드라이브의 볼륨에는 이름이 없습니다.
-     볼륨 일련 번호: F6ED-046F
-    
-     C:\Users\Playdata\Documents\데이터 분석 28기\Python Programming 디렉터리
-    
-    2023-01-19  오전 09:11    <DIR>          .
-    2023-01-19  오전 09:11    <DIR>          ..
-    2023-01-19  오전 08:54    <DIR>          .ipynb_checkpoints
-    2023-01-16  오전 11:14                21 hello.py
-    2023-01-16  오후 04:52           231,653 Python Programming Day 1.ipynb
-    2023-01-17  오후 04:47            87,557 Python Programming Day 2.ipynb
-    2023-01-18  오후 04:40            74,253 Python Programming Day 3.ipynb
-    2023-01-19  오전 09:11               811 Python Programming Day 4.ipynb
-    2023-01-16  오전 11:28             4,262 python.jpg
-    2023-01-16  오후 02:39            78,063 근의공식.jpg
-                   7개 파일             476,620 바이트
-                   3개 디렉터리  188,470,226,944 바이트 남음
-    
 
 **텍스트모드로 파일 읽고 저장하기**
 
@@ -48,31 +17,6 @@ fd = open('hello.txt', 'w') # hello.txt 파일을 쓰기모드로 열기
 fd.write('Hello World')
 fd.close()
 ```
-
-
-```python
-!dir
-```
-
-     C 드라이브의 볼륨에는 이름이 없습니다.
-     볼륨 일련 번호: F6ED-046F
-    
-     C:\Users\Playdata\Documents\데이터 분석 28기\Python Programming 디렉터리
-    
-    2023-01-19  오전 09:16    <DIR>          .
-    2023-01-19  오전 09:16    <DIR>          ..
-    2023-01-19  오전 08:54    <DIR>          .ipynb_checkpoints
-    2023-01-16  오전 11:14                21 hello.py
-    2023-01-19  오전 09:16                11 hello.txt
-    2023-01-16  오후 04:52           231,653 Python Programming Day 1.ipynb
-    2023-01-17  오후 04:47            87,557 Python Programming Day 2.ipynb
-    2023-01-18  오후 04:40            74,253 Python Programming Day 3.ipynb
-    2023-01-19  오전 09:15             2,840 Python Programming Day 4.ipynb
-    2023-01-16  오전 11:28             4,262 python.jpg
-    2023-01-16  오후 02:39            78,063 근의공식.jpg
-                   8개 파일             478,660 바이트
-                   3개 디렉터리  188,175,724,544 바이트 남음
-    
 
 - 파일객체 = open('파일이름', '파일모드')
 - 파일객체.read('문자열')
@@ -292,75 +236,12 @@ Image('file_mode.png', width=400)
 
 
     
-![png](/assetns/images/output_30_0.png)
+![png](/assets/images/output_28_0.png)
     
 
 
 
-# Workshop
-
-**파일에서 10자 이하인 단어 개수 세기**
-- 단어가 줄 단위로 저장된 words.txt 파일이 주어집니다. 10자 이하인 단어의 개수가 출력되게 만드세요.
-
-
-```python
-with open('words.txt', 'r') as fd:
-    line_list = fd.readlines()
-    count = 0
-    for line in line_list:
-        if len(line.rstrip('\n')) <= 10:
-            count += 1
-count
-```
-
-
-
-
-    2
-
-
-
-
-```python
-with open('words.txt', 'r') as fd:
-    total_str = fd.read()
-    line_list = total_str.split()
-    count = 0
-    for line in line_list:
-        if len(line) <= 10:
-            count += 1
-count 
-```
-
-
-
-
-    2
-
-
-
-**특정 문자가 들어 있는 단어 찾기**
-- 문자열이 저장된 words2.txt 파일이 주어집니다(문자열은 한 줄로 저장되어 있습니다). words2.txt 파일에서 문자 c가 포함된 단어를 각 줄에 출력하는 프로그램을 만드세요. 단어를 출력할 때는 등장한 순서대로 출력해야 하며 ,(콤마)와 .(점)은 출력하지 않아야 합니다.
-
-
-```python
-with open('words2.txt', 'r') as fd:
-    paragraph = fd.read()
-    word_list = paragraph.split()
-    for word in word_list:
-        if 'c' in word:
-            print(word.strip(',.'))
-```
-
-    dictator
-    subjects
-    change
-    costume
-    elegance
-    accepted
-    
-
-# 함수
+## 함수
 
 - 코드의 용도 구분
 - 코드를 재사용
@@ -495,120 +376,6 @@ add_r, sub_r
     (8, 2)
 
 
-
-# Workshop
-
-**I have a dream 연설문 단어 빈도수 계산**
-- WordCount 함수에서 ihaveadream.txt 파일을 열어 전체 내용 중 단어를 키로, 빈도를 값으로 매핑한 사전형 자료를 반환하세요.
-- 단 stopwords.txt에 있는 단어는 제외시킵니다.
-- WordCount 함수의 결과를 result.txt로 저장하세요.
-
-- majorityCnt 함수에서 사전형 자료를 인수로 받아 값을 기준으로 내림차순으로 정렬하여 값이 가장 큰 키를 반환하세요.
-
-
-```python
-# 1. 파일 열어 텍스트 읽기
-with open('ihaveadream.txt', 'r') as fd1:
-    speech = fd1.read()
-with open('stopwords.txt', 'r') as fd2:
-    stopwords = fd2.read()
-```
-
-
-```python
-# 2. 단어 단위로 준비하기
-word_list = speech.lower().split()
-stop_list = stopwords.lower().split()
-```
-
-
-```python
-# 3. 단어별 빈도수 구하기
-# option 1
-d = {}
-for word in word_list: # word : i -> am -> happy -> ....
-    if word in stop_list: # stopwords에 있는 단어들은 skip
-        continue
-    if word not in d:
-        d[word] = 1 # 이 단어가 처음 등장해서 최초로 카운트
-    else:
-        d[word] += 1 # 이미 단어가 d에 등록된 경우에는 카운트 누적
-```
-
-
-```python
-# 3. 단어별 빈도수 구하기
-# option 2
-d = {}
-for word in word_list: # word : i -> am -> happy -> ....
-    if word in stop_list: # stopwords에 있는 단어들은 skip
-        continue
-    d[word] = d.get(word, 0) + 1 # 이미 단어가 사전에 있는 경우, 없는 경우 모두 값을 가져오는 코드
-```
-
-
-```python
-len(d)
-```
-
-
-
-
-    483
-
-
-
-
-```python
-# # 최초 i 의 경우
-# d['i'] = d.get('i', 0) + 1 # 0 + 1
-# ...
-# ...
-# # 두번째 i의 경우
-# d['i'] = d.get('i', 0) + 1 # 1 + 1
-# ...
-# ...
-# # 세번째 i 의 경우
-# d['i'] = d.get('i', 0) + 1 # 2 + 1
-```
-
-
-```python
-# 4. 앞에서 구한 dictionary를 result.txt로 저장하기
-with open('result.txt', 'w') as fd3:
-    fd3.write(str(d))
-```
-
-
-```python
-# 전체 함수
-def WordCount():
-    # 1. 파일 열어 텍스트 읽기
-    with open('ihaveadream.txt', 'r') as fd1:
-        speech = fd1.read()
-    with open('stopwords.txt', 'r') as fd2:
-        stopwords = fd2.read()
-        
-    # 2. 단어 단위로 준비하기
-    word_list = speech.lower().split()
-    stop_list = stopwords.lower().split()
-    
-    # 3. 단어별 빈도수 구하기
-    # option 2
-    d = {}
-    for word in word_list: # word : i -> am -> happy -> ....
-        if word in stop_list: # stopwords에 있는 단어들은 skip
-            continue
-        d[word] = d.get(word, 0) + 1 # 이미 단어가 사전에 있는 경우, 없는 경우 모두 값을 가져오는 코드
-    
-    # 4. 앞에서 구한 dictionary를 result.txt로 저장하기
-    with open('result.txt', 'w') as fd3:
-        fd3.write(str(d))
-        
-    return d
-
-d = WordCount()    
-```
 
 **(참고) 딕셔너리 정렬**
 
@@ -757,25 +524,6 @@ sorted(scores.items(), key=lambda item:item[1], reverse=True)
 
 
 
-
-```python
-def majorityCnt(d):
-    most_freq_word = sorted(d.items(), key=lambda item:item[1], reverse=True)[0]
-    return most_freq_word
-```
-
-
-```python
-majorityCnt(d)
-```
-
-
-
-
-    ('freedom', 19)
-
-
-
 **(참고) 단어리스트에서 개별 단어들을 strip 하려면..**
 
 
@@ -824,7 +572,7 @@ word_list = ['i.', 'am,.', 'happy.,']
 
 
 
-# 위치 인수와 키워드 인수
+## 위치 인수와 키워드 인수
 
 
 ```python
@@ -1044,7 +792,7 @@ personal_info(name='장경희', age=47, address='세곡동', phone='0101234567',
     etc 없음
     
 
-# 함수에서 재귀 호출 사용하기
+## 함수에서 재귀 호출 사용하기
 
 
 ```python
@@ -1407,8 +1155,5 @@ for dan in range(2, 10):
     9 * 8 = 72
     9 * 9 = 81
     
-
-
-```python
-
-```
+## Reference
+[파이썬 코딩 도장](https://dojang.io/course/view.php?id=7)

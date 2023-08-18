@@ -1,4 +1,9 @@
-# 람다 표현식
+---
+tag: [python, 기초코딩]
+---
+# 람다표현식, 클래스
+
+## 람다 표현식
 
 
 ```python
@@ -207,244 +212,7 @@ list(filter(f, a))
 
 
 
-# Workshop
-
-**거리계산**
-- 리스트를 이용하여 점 사이의 거리를 계산해 보자.
-- 직교 좌표 위에서 A는 (1, 1), B는 (3, 2), C는 (5,7)일 때 X(2, 3)와  A/B/C와의 거리를 각각 구하여라.
-- distMeasure 함수 작성하기
-
-
-```python
-from math import sqrt # math라는 모듈에서 sqrt 함수를 가져옴
-```
-
-
-```python
-# option 1 : 함수 사용
-points = [(1, 1), (3, 2), (5, 7)] # A, B, C
-X = (2, 3)
-
-def distMeasure(pts):    
-    result = []
-    for pt in pts : # A->B->C
-        dist = sqrt((X[0] - pt[0])**2 + (X[1] - pt[1])**2)
-        result.append(dist)  
-    return result
-
-dist_all = distMeasure(points)
-dist_all
-```
-
-
-
-
-    [2.23606797749979, 1.4142135623730951, 5.0]
-
-
-
-
-```python
-# option 2 : map 을 적용
-points = [(1, 1), (3, 2), (5, 7)] # A, B, C
-X = (2, 3)
-
-def distMeasure_1p(pt):    
-    dist = sqrt((X[0] - pt[0])**2 + (X[1] - pt[1])**2)
-    return dist
-
-list(map(distMeasure_1p, points))
-```
-
-
-
-
-    [2.23606797749979, 1.4142135623730951, 5.0]
-
-
-
-
-```python
-# option 3 : lambda 적용
-list(map(lambda pt:sqrt((X[0] - pt[0])**2 + (X[1] - pt[1])**2), points))
-```
-
-
-
-
-    [2.23606797749979, 1.4142135623730951, 5.0]
-
-
-
-**이미지 파일만 가져오기**
-- 다음 소스 코드를 완성하여 확장자가 .jpg, .png인 이미지 파일만 출력되게 만드세요. 여기서는 람다 표현식을 사용해야 하며 출력 결과는 리스트 형태라야 합니다. 람다 표현식에서 확장자를 검사할 때는 문자열 메서드를 활용하세요.
-
-```
-files = ['font', '1.png', '10.jpg', '11.gif', '2.jpg', '3.png', 'table.xslx', 'spec.docx']
-
-실행결과
-['1.png', '10.jpg', '2.jpg', '3.png']
-```
-
-
-```python
-files = ['font', '1.png', '10.jpg', '11.gif', '2.jpg', '3.png', 'table.xslx', 'spec.docx']
-
-def filter_img(x): # 파일명 예 : 'font', '1.png', '10.jpg'
-    return (x.find('.png') != -1) or (x.find('.jpg') != -1) # .png 이거나 .jpg인 파일인 경우 True 반환
-```
-
-
-```python
-# map은 함수의 결과물이 그대로 적용
-# list(map(filter_img, files))
-```
-
-
-
-
-    [False, True, True, False, True, True, False, False]
-
-
-
-
-```python
-# filter은 함수에서 True로 리턴된 요소만 반환
-list(filter(filter_img, files))
-```
-
-
-
-
-    ['1.png', '10.jpg', '2.jpg', '3.png']
-
-
-
-
-```python
-# filter_img 함수를 lambda 식으로 대체
-list(filter(lambda x:(x.find('.png') != -1) or (x.find('.jpg') != -1), files))
-```
-
-
-
-
-    ['1.png', '10.jpg', '2.jpg', '3.png']
-
-
-
-**파일 이름을 한꺼번에 바꾸기**
-- 표준 입력으로 숫자.확장자 형식으로 된 파일 이름 여러 개가 입력됩니다. 파일 이름이 숫자 3개이면서 앞에 0이 들어가는 형식으로 출력되게 만드세요. 예를 들어 1.png는 001.png, 99.docx는 099.docx, 100.xlsx는 100.xlsx처럼 출력되어야 합니다. 그리고 람다 표현식을 사용해야 하며 출력 결과는 리스트 형태라야 합니다. 람다 표현식에서 파일명을 처리할 때는 문자열 포매팅과 문자열 메서드를 활용하세요.
-
-```
-입력 예
-1.jpg 10.png 11.png 2.jpg 3.png
-
-결과
-['001.jpg', '010.png', '011.png', '002.jpg', '003.png']
-
-입력 예
-97.xlsx 98.docx 99.docx 100.xlsx 101.docx 102.docx
-
-결과
-['097.xlsx', '098.docx', '099.docx', '100.xlsx', '101.docx', '102.docx']
-```
-
-
-```python
-file_names = input().split()
-```
-
-    97.xlsx 98.docx 99.docx 100.xlsx 101.docx 102.docx
-    
-
-
-```python
-file_names
-```
-
-
-
-
-    ['97.xlsx', '98.docx', '99.docx', '100.xlsx', '101.docx', '102.docx']
-
-
-
-
-```python
-names = []
-exts = []
-
-for file_name in file_names:
-    name = int(file_name.split('.')[0])
-    ext = file_name.split('.')[1]
-    
-    names.append(name)
-    exts.append(ext)
-```
-
-
-```python
-names, exts
-```
-
-
-
-
-    ([97, 98, 99, 100, 101, 102], ['xlsx', 'docx', 'docx', 'xlsx', 'docx', 'docx'])
-
-
-
-
-```python
-# 1개 샘플 포매팅 예시
-name = 1
-ext = 'jpg'
-
-'{0:03d}.{1}'.format(name, ext)
-```
-
-
-
-
-    '001.jpg'
-
-
-
-
-```python
-# name = '1'
-# ext = 'jpg'
-
-# '{0:>03s}.{1}'.format(name, ext)
-```
-
-
-
-
-    '001.jpg'
-
-
-
-
-```python
-def myformat(name, ext):
-    return '{0:03d}.{1}'.format(name, ext)
-```
-
-
-```python
-list(map(myformat, names, exts))
-```
-
-
-
-
-    ['097.xlsx', '098.docx', '099.docx', '100.xlsx', '101.docx', '102.docx']
-
-
-
-# 변수의 사용 범위
+## 변수의 사용 범위
 
 
 ```python
@@ -551,7 +319,7 @@ print_hello()
     hello country
     
 
-# 클래스
+## 클래스
 
 ```
 class 클래스이름: # 붕어빵 틀
@@ -643,6 +411,21 @@ James.greeting()
 
     안녕하세요
     
+
+
+```python
+from IPython.display import Image
+Image('인스턴스와 self.PNG', width=400)
+```
+
+
+
+
+    
+![png](/assets/images/output_47_0.png)
+    
+
+
 
 
 ```python
@@ -806,7 +589,7 @@ Maria.__wallet
 
     AttributeError                            Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_8812\1432878972.py in <module>
+    <ipython-input-49-18a9baf0c01e> in <module>
           1 # 비공개 속성은 외부에서 접근하면 에러가 생김
     ----> 2 Maria.__wallet
     
@@ -1000,7 +783,7 @@ Calc.add(10, 20) # 클래스에서 바로 메서드를 호출(인스턴스 만�
     30
     
 
-# 클래스 상속 사용하기
+## 클래스 상속 사용하기
 
 ```
 class 기반클래스이름:
@@ -1131,12 +914,13 @@ James.greeting() # 자식 클래스에서 __init__()를 사용하면서 부모�
 
     AttributeError                            Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_8812\1104609217.py in <module>
+    <ipython-input-77-7364268d9046> in <module>
           1 James = Student()
-    ----> 2 James.greeting()
+    ----> 2 James.greeting() # 자식 클래스에서 __init__()를 사용하면서 부모클래스의 __init__()가 사용이 안됨
+          3                  # self.hello가 설정되지 않은 상태로 greeting()이 호출되면서 오류
     
 
-    ~\AppData\Local\Temp\ipykernel_8812\4008125588.py in greeting(self)
+    <ipython-input-76-763e0460dabe> in greeting(self)
           5 
           6     def greeting(self):
     ----> 7         print(self.hello)
@@ -1322,67 +1106,9 @@ James.gotoschool()
     학교가기
     
 
-# Workshop
-
-**리스트에 기능 추가하기**
-- 아래 예시와 같이 리스트(list)에 replace 메서드를 추가한 AdvancedList 클래스를 작성하세요. AdvancedList는 list를 상속받아서 만들고, replace 메서드는 리스트에서 특정 값으로 된 요소를 찾아서 다른 값으로 바꾸도록 만드세요.
-
-```
-x = AdvancedList([1, 2, 3, 1, 2, 3, 1, 2, 3])
-x.replace(1, 100)
-print(x)
-
-결과
-[100, 2, 3, 100, 2, 3, 100, 2, 3]
-```
-
-
-```python
-class AdvancedList(list):
-    def replace(self, old, new):
-        for i, v in enumerate(self):
-            if v == old:
-                self[i] = new        
-```
-
-
-```python
-x = AdvancedList([1, 2, 3, 1, 2, 3, 1, 2, 3])
-```
-
-
-```python
-x.replace(1, 100)
-```
-
-
-```python
-x
-```
-
-
-
-
-    [100, 2, 3, 100, 2, 3, 100, 2, 3]
-
-
-
-
-```python
-from IPython.display import Image
-Image('인스턴스와 self.PNG', width=400)
-```
-
-
-
-
-    
-![png](/assets/images/output_142_0.png)
-    
-
-
-
 
 ```python
 
 ```
+## Reference
+[파이썬 코딩 도장](https://dojang.io/course/view.php?id=7)
