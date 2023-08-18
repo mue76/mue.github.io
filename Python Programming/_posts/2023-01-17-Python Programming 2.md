@@ -1,4 +1,10 @@
-# 문자열 사용하기
+---
+tag: [python, 기초코딩]
+---
+
+# 시퀀스 객체, 흐름제어
+
+## 문자열 사용하기
 
 
 ```python
@@ -141,7 +147,7 @@ print(s)
     integrate systems more effectively.
     
 
-# 리스트와 튜플
+## 리스트와 튜플
 
 - 리스트 = [값1, 값2, ....]
 
@@ -486,36 +492,7 @@ tuple_c
 
 
 
-# Workshop
-
-**range로 리스트 만들기**
-- [5, 3, 1, -1, -3, -5, -7, -9]가 출력되게 만드세요
-
-
-```python
-a = list(range(5, -10, -2))
-print(a)
-```
-
-    [5, 3, 1, -1, -3, -5, -7, -9]
-    
-
-**range로 튜플 만들기**
-- 표준입력으로 정수가 입력됩니다. range의 시작하는 숫자는 -10, 끝나는 숫자는 10이며 입력된 정수만큼 증가하는 숫자가 들어가도록 튜플을 만들고, 해당 튜플을 출력하는 프로그램을 만드세요(input에서 안내 문자열은 출력하지 않아야 합니다.)
-- 입력 : 2, 출력: (-10, -8, -6, -4, -2, 0, 2, 4, 6, 8)
-
-
-```python
-step = int(input())
-b = tuple(range(-10, 10, step))
-print(b)
-```
-
-    2
-    (-10, -8, -6, -4, -2, 0, 2, 4, 6, 8)
-    
-
-# 시퀀스 자료형 활용하기
+## 시퀀스 자료형 활용하기
 
 - 시퀀스 자료형 : list, tuple, range, str
 
@@ -672,7 +649,7 @@ c + d
 
 
 ```python
-range(5) + range(5)
+range(5) + range(5) # error
 ```
 
 
@@ -680,8 +657,8 @@ range(5) + range(5)
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\731926869.py in <module>
-    ----> 1 range(5) + range(5)
+    <ipython-input-49-df00a7f37ff5> in <module>
+    ----> 1 range(5) + range(5) # error
     
 
     TypeError: unsupported operand type(s) for +: 'range' and 'range'
@@ -746,7 +723,7 @@ s1 + s2
 
 
 ```python
-range(5) * 2
+range(5) * 2 # error
 ```
 
 
@@ -754,8 +731,8 @@ range(5) * 2
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\761196676.py in <module>
-    ----> 1 range(5) * 2
+    <ipython-input-55-daacaaa62078> in <module>
+    ----> 1 range(5) * 2 # error
     
 
     TypeError: unsupported operand type(s) for *: 'range' and 'int'
@@ -931,7 +908,7 @@ b[4]
 
     IndexError                                Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\3059827491.py in <module>
+    <ipython-input-70-630f253a45c9> in <module>
     ----> 1 b[4]
     
 
@@ -1040,7 +1017,7 @@ a
 
 ```python
 b = (1, 2, 3, 4)
-del b[0]
+del b[0] # error
 ```
 
 
@@ -1048,7 +1025,7 @@ del b[0]
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\2049846757.py in <module>
+    <ipython-input-81-c67671bed68e> in <module>
           1 b = (1, 2, 3, 4)
     ----> 2 del b[0]
     
@@ -1059,7 +1036,7 @@ del b[0]
 
 ```python
 s = 'Hello'
-del s[0]
+del s[0] # error
 ```
 
 
@@ -1067,7 +1044,7 @@ del s[0]
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\1843072722.py in <module>
+    <ipython-input-82-fadfb82df817> in <module>
           1 s = 'Hello'
     ----> 2 del s[0]
     
@@ -1077,7 +1054,7 @@ del s[0]
 
 
 ```python
-del range(10)[0]
+del range(10)[0] # error
 ```
 
 
@@ -1085,7 +1062,7 @@ del range(10)[0]
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\849124569.py in <module>
+    <ipython-input-83-3e9427b81543> in <module>
     ----> 1 del range(10)[0]
     
 
@@ -1234,98 +1211,6 @@ a[-1::-1]
 
 
 
-# Workshop
-
-**최근 3년간 인구 출력하기**
-- 리스트 year에 연도, population에 서울시 인구수가 저장되어 있습니다. 
-- 아래 소스 코드를 완성하여 최근 3년간 연도와 인구수를 리스트로 출력되게 만드세요.
-
-
-```python
-year = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
-population = [10249679, 10195318, 10143645, 10103233, 10022181, 9930616, 9857426, 9838892]
-```
-
-
-```python
-print(year[-3:])
-print(population[-3:])
-```
-
-    [2016, 2017, 2018]
-    [9930616, 9857426, 9838892]
-    
-
-
-```python
-# year와 population을 각 원소끼리 연결지어서 출력할 수 있음
-list(zip(year[-3:], population[-3:]))
-```
-
-
-
-
-    [(2016, 9930616), (2017, 9857426), (2018, 9838892)]
-
-
-
-
-```python
-tuple(zip(year[-3:], population[-3:]))
-```
-
-
-
-
-    ((2016, 9930616), (2017, 9857426), (2018, 9838892))
-
-
-
-
-```python
-dict(zip(year[-3:], population[-3:]))
-```
-
-
-
-
-    {2016: 9930616, 2017: 9857426, 2018: 9838892}
-
-
-
-**인덱스가 홀수인 요소 출력하기**
-- 다음 소스 코드를 완성하여 튜플 n에서 인덱스가 홀수인 요소들이 출력되게 만드세요.
-
-
-```python
-n = -32, 75, 97, -10, 9, 32, 4, -15, 0, 76, 14, 2
-```
-
-
-```python
-#n[시작:끝:보폭]
-n[1:len(n):2]
-```
-
-
-
-
-    (75, -10, 32, -15, 76, 2)
-
-
-
-
-```python
-n[1::2]
-```
-
-
-
-
-    (75, -10, 32, -15, 76, 2)
-
-
-
 - 시퀀스객체[시작인덱스:끝인덱스] = 시퀀스객체
 - tuple, range, str은 슬라이스 범위에 요소를 할당할 수 없음
 
@@ -1346,7 +1231,7 @@ a
 
 ```python
 b = (0, 10, 20, 30, 40, 50, 60, 70, 80, 90)
-b[2:5] = ['a', 'b', 'c']
+b[2:5] = ['a', 'b', 'c'] # error
 b
 ```
 
@@ -1355,7 +1240,7 @@ b
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\1822267862.py in <module>
+    <ipython-input-97-21bbaaf708c5> in <module>
           1 b = (0, 10, 20, 30, 40, 50, 60, 70, 80, 90)
     ----> 2 b[2:5] = ['a', 'b', 'c']
           3 b
@@ -1393,7 +1278,7 @@ a
 
 
 ```python
-del b[2:5]
+del b[2:5] # error
 ```
 
 
@@ -1401,197 +1286,14 @@ del b[2:5]
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\223786831.py in <module>
+    <ipython-input-100-d72f2f847a33> in <module>
     ----> 1 del b[2:5]
     
 
     TypeError: 'tuple' object does not support item deletion
 
 
-# Workshop
-
-**리스트의 마지막 요소 5개 삭제하기**
-- 표준 입력으로 숫자 또는 문자열 여러개가 입력되어 리스트 x에 저장됩니다(입력되는 숫자 또는 문자열의 개수는 정해져 있지 않음). 
-- 리스트 x의 마지막 요소 5개를 삭제한 뒤 튜플로 출력되게 만드세요.
-
-
-```python
-x = input()
-```
-
-    a b c d 1 2 3 4 5 e f
-    
-
-
-```python
-x_list = x.split()
-x_list
-```
-
-
-
-
-    ['a', 'b', 'c', 'd', '1', '2', '3', '4', '5', 'e', 'f']
-
-
-
-
-```python
-del x_list[-5:]
-```
-
-
-```python
-tuple(x_list)
-```
-
-
-
-
-    ('a', 'b', 'c', 'd', '1', '2')
-
-
-
-
-```python
-# 함수를 한번에 연결
-x = input().split()
-del x[-5:]
-print(tuple(x))
-```
-
-    1 2 3 4 5 6 7 7 9 10
-    ('1', '2', '3', '4', '5')
-    
-
-**주민번호로 성별 구분하기**
-- 아래와 같은 홍길동씨의 주민번호를 대쉬(-) 기호 전후로 쪼개보자. 성별이 남자면 'male', 여자면 'female'을 출력하세요.
-
-
-```python
-pin= '881204-1068234' # 1일 경우 남자, 2일 경우 여자
-pit_list = pin.split('-')
-if pit_list[1][0] == '1':
-    print('male')
-else:
-    print('female')
-```
-
-    male
-    
-
-**핸드폰 번호 가리기**
-- 전화번호가 문자열 phone_number로 주어졌을 때, 전화번호의 뒷 4자리를 제외한 나머지 숫자를 전부 *으로 가린 문자열을 출력하세요.
-
-- 제한 조건
-- s는 길이 4 이상, 20이하인 문자열입니다.
-- 입출력 예
-```
-phone_number 출력 문자열
-"01033334444" "*******4444"
-"027778888" "*****8888"
-```
-
-
-```python
-phone_number = input()
-```
-
-    01033334444
-    
-
-
-```python
-phone_number
-```
-
-
-
-
-    '01033334444'
-
-
-
-
-```python
-phone_number[-4:]
-```
-
-
-
-
-    '4444'
-
-
-
-
-```python
-phone_number[:-4]
-```
-
-
-
-
-    '0103333'
-
-
-
-
-```python
-s1 = '*' * len(phone_number[:-4])
-s2 = phone_number[-4:]
-```
-
-
-```python
-s1
-```
-
-
-
-
-    '*******'
-
-
-
-
-```python
-s2
-```
-
-
-
-
-    '4444'
-
-
-
-
-```python
-s1 + s2
-```
-
-
-
-
-    '*******4444'
-
-
-
-
-```python
-# 최종
-phone_number = input()
-s1 = '*' * len(phone_number[:-4])
-s2 = phone_number[-4:]
-print(s1 + s2)
-```
-
-    027778888
-    *****8888
-    
-
-# 딕셔너리
+## 딕셔너리
 
 - 딕셔너리 = {키1:값1, 키2:값2, 키3:값3, ....}
 
@@ -1717,11 +1419,12 @@ lux = {[1, 2, 3] : 490, 'melee':500, 'armor':18.72} # 키 값에 리스트가 �
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\3510054695.py in <module>
+    <ipython-input-114-45f73fd654b6> in <module>
     ----> 1 lux = {[1, 2, 3] : 490, 'melee':500, 'armor':18.72} # 키 값에 리스트가 들어간 경우
     
 
     TypeError: unhashable type: 'list'
+
 
 
 
@@ -1873,7 +1576,7 @@ lux['power']
 
     KeyError                                  Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_2268\4007741939.py in <module>
+    <ipython-input-127-4d5bef63b7f7> in <module>
     ----> 1 lux['power']
     
 
@@ -1948,47 +1651,9 @@ len(lux)
 
 
 
-**게임 캐릭터 능력 저장**
-- 표준 입력으로 문자열 여러 개와 숫자(실수) 여러 개가 두 줄로 입력됩니다. 입력된 첫 번째 줄은 키, 두 번째 줄은 값으로 하여 딕셔너리를 생성한 뒤 딕셔너리를 출력하는 프로그램을 만드세요. input().split()의 결과를 변수 한개에 저장하면 리스트로 저장됩니다.
+## 흐름제어
 
-```
-(입력예)
-health health_regen mana mana_regen
-575.6 1.7 338.8 1.63
-
-
-(결과)
-{'health':575.6, 'health_regen':1.7, 'mana':338.8, 'mana_regen':1.63}
-
-```
-
-
-```python
-k_list = input().split()
-v_list = input().split()
-```
-
-    health health_regen mana mana_regen
-    
-
-
-```python
-dict(zip(k_list, v_list))
-```
-
-
-
-
-    {'health': '576.6',
-     'health_regen': '1.7',
-     'mana': '338.8',
-     'mana_regen': '1.63'}
-
-
-
-# 흐름제어
-
-# if, else, elif
+### if, else, elif
 
 **교통 카드 시스템 만들기**
 
@@ -2023,12 +1688,11 @@ else:
 print(balance)    
 ```
 
-    0
-    오류입니다.
-    9000
+    7
+    8350
     
 
-# for와 range 사용하기
+### for와 range 사용하기
 
 ```
 for 변수 in range(횟수):
@@ -2121,11 +1785,6 @@ for i in [100, 200, 300]: # 총 3회 반복하되, i에는 시퀀스 객체의 �
 #     print(lst[i])
 ```
 
-    100
-    200
-    300
-    
-
 
 ```python
 for i, v in enumerate([100, 200, 300]):
@@ -2164,70 +1823,7 @@ for v in reversed('Hello'):
     H
     
 
-# Workshop
-
-**구구단 출력 프로그램**
-- 표준 입력으로 정수가 입력됩니다. 입력된 정수의 구구단을 출력하는 프로그램을 만드세요(input에서 안내 문자열은 출력하지 않아야 합니다). 출력형식은 숫자 * 숫자 = 숫자 처럼 만들고 숫자와 *, = 사이는 공백을 한칸 띄웁니다.
-
-```
-입력 예
-2
-
-결과
-2 * 1 = 2
-2 * 2 = 4
-2 * 3 = 6
-2 * 4 = 8
-2 * 5 = 10
-2 * 6 = 12
-2 * 7 = 14
-2 * 8 = 16
-2 * 9 = 18
-```
-
-
-```python
-x = int(input())
-```
-
-    2
-    
-
-
-```python
-for i in range(1, 10):
-    print(x, '*', i, '=', x*i)
-```
-
-    2 * 1 = 2
-    2 * 2 = 4
-    2 * 3 = 6
-    2 * 4 = 8
-    2 * 5 = 10
-    2 * 6 = 12
-    2 * 7 = 14
-    2 * 8 = 16
-    2 * 9 = 18
-    
-
-
-```python
-for i in range(1, 10):
-    print("{0} * {1} = {2}".format(x, i, x*i))
-```
-
-    2 * 1 = 2
-    2 * 2 = 4
-    2 * 3 = 6
-    2 * 4 = 8
-    2 * 5 = 10
-    2 * 6 = 12
-    2 * 7 = 14
-    2 * 8 = 16
-    2 * 9 = 18
-    
-
-# while 반복문 사용하기
+### while 반복문 사용하기
 
 ```
 초기식
@@ -2257,9 +1853,9 @@ while i > 0:
     1 helllo world
     
 
-# continue, break
+### continue, break
 
-# Workshop
+### 실습
 
 - 주사위 던지고 눈을 출력하는 동작을 계속 반복하다가
 - "3"이 나왔을때 멈추기
@@ -2275,13 +1871,6 @@ n = random.randint(1, 6) # 1에서 6사이의 무작위수 추출
 ```
 
 
-
-
-    5
-
-
-
-
 ```python
 i = 0
 while i != 3:
@@ -2289,21 +1878,7 @@ while i != 3:
     print(i)
 ```
 
-    4
     5
-    4
-    1
-    4
-    6
-    1
-    1
-    1
-    2
-    6
-    4
-    4
-    6
-    1
     3
     
 
@@ -2394,3 +1969,5 @@ while True:
 ```python
 
 ```
+## Reference
+[파이썬 코딩 도장](https://dojang.io/course/view.php?id=7)
