@@ -1,4 +1,5 @@
 # Matplotlib
+
 ## Matplotlib API 개요
 
 - 정보 시각화는 데이터 분석에서 무척 중요
