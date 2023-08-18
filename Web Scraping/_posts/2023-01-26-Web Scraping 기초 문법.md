@@ -1511,7 +1511,6 @@ soup.a['href'], soup.a['class'], soup.a['id']
 
 
 ## Reference
-## Reference
 - [웹 크롤링 & 데이터 분석 with 파이썬 (장철원 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=286684632)
 - [Do it! HTML + CSS + 자바스크립트 웹 표준의 정석 (고경희 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=260235280)
 - [데이터 분석을 위한 파이썬 철저 입문 (최은석 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=189403433)
