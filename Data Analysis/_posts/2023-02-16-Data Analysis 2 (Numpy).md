@@ -1,3 +1,6 @@
+---
+tag: [python, numpy, data analysis]
+---
 # Numpy
 
 ## Numpy(넘파이) 개요
@@ -2479,3 +2482,5 @@ p.reshape(4, 4) # 16명 4팀 무작위 추출
            [ 1,  2, 14, 12]])
 
 
+## Reference
+[파이썬 라이브러리를 활용한 데이터 분석 (웨스 맥키니 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=315354750)

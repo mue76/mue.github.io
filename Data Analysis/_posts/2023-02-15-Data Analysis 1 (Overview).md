@@ -1,3 +1,7 @@
+---
+tag: [python, 데이터분석, data analysis overview, kaggle bike sharing]
+---
+
 # 데이터 분석
 
 # 1. 데이터 분석 개요

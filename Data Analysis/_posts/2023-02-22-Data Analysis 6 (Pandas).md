@@ -1,3 +1,7 @@
+---
+tag: [python, pandas, data analysis]
+---
+
 # Pandas (4)
 
 ## 10 시계열 데이터 다루기
@@ -3014,4 +3018,5 @@ df.loc['179 days':'181 days']
   </div>
 
 
-
+## Reference
+[파이썬 라이브러리를 활용한 데이터 분석 (웨스 맥키니 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=315354750)

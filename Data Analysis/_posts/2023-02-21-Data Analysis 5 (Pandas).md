@@ -1,3 +1,7 @@
+---
+tag: [python, pandas, data analysis]
+---
+
 # Pandas (3)
 
 ## 8. 데이터 정제 및 준비
@@ -18779,3 +18783,5 @@ pivoted_cpi.columns
     Int64Index([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], dtype='int64', name='Month')
 
 
+## Reference
+[파이썬 라이브러리를 활용한 데이터 분석 (웨스 맥키니 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=315354750)
