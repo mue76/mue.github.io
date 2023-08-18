@@ -1,3 +1,5 @@
+# Numpy
+
 ## Numpy(넘파이) 개요
 - Numpy는 Numerical Python의 줄임말
 - 파이썬에서 산술 계산을 위한 가장 중요한 필수 패키지
