@@ -1,4 +1,9 @@
-# 예외 처리하기
+---
+tag: [python, 기초코딩]
+---
+# 예외처리하기, 이터레이터
+
+## 예외 처리하기
 
 - 예외 처리는 에러가 발생하더라도 스크립트 실행을 중단하지 않고 계속 실행하고자 할 때 사용함
 
@@ -25,7 +30,7 @@ print(y)
 
     ZeroDivisionError                         Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\1002038895.py in <module>
+    <ipython-input-1-4cfe023edecd> in <module>
           1 x = int(input("나눌 숫자를 입력하세요 : "))
           2 
     ----> 3 y = 10/x
@@ -68,7 +73,7 @@ r = y[index]/5
 print(r)
 ```
 
-    인덱스를 입력해주세요 : 3
+    인덱스를 입력해주세요 : 4
     
 
 
@@ -76,7 +81,7 @@ print(r)
 
     IndexError                                Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\823379373.py in <module>
+    <ipython-input-3-7afbc2e37935> in <module>
           2 
           3 index = int(input("인덱스를 입력해주세요 : "))
     ----> 4 r = y[index]/5
@@ -95,22 +100,22 @@ r = y[index]/x
 print(r)
 ```
 
-    인덱스와 나눌 숫자를 입력해주세요 : 1 0
+    인덱스와 나눌 숫자를 입력해주세요 : 4 0
     
 
 
     ---------------------------------------------------------------------------
 
-    ZeroDivisionError                         Traceback (most recent call last)
+    IndexError                                Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\2044745325.py in <module>
+    <ipython-input-4-691609081ed3> in <module>
           2 
           3 index, x = map(int, input("인덱스와 나눌 숫자를 입력해주세요 : ").split())
     ----> 4 r = y[index]/x
           5 print(r)
     
 
-    ZeroDivisionError: division by zero
+    IndexError: list index out of range
 
 
 
@@ -153,7 +158,7 @@ except IndexError as e:
     print(e)  
 ```
 
-    인덱스와 나눌 숫자를 입력해주세요 : 4 3
+    인덱스와 나눌 숫자를 입력해주세요 : 4 0
     list index out of range
     
 
@@ -182,8 +187,8 @@ else:
     print(r)
 ```
 
-    인덱스와 나눌 숫자를 입력해주세요 : 0 5
-    2.0
+    인덱스와 나눌 숫자를 입력해주세요 : 3 0
+    list index out of range
     
 
 ```
@@ -215,8 +220,8 @@ finally:
     print('프로그램 실행이 끝났습니다.')
 ```
 
-    인덱스와 나눌 숫자를 입력해주세요 : 1 5
-    4.0
+    인덱스와 나눌 숫자를 입력해주세요 : 3 0
+    list index out of range
     프로그램 실행이 끝났습니다.
     
 
@@ -240,7 +245,7 @@ except Exception as e:
     예외가 발생했습니다. 3의 배수가 아닙니다
     
 
-# 이터레이터
+## 이터레이터
 
 - **이터레이터(iterator)**는 값을 차례대로 꺼낼 수 있는 객체
 - 파이썬에서는 이터레이터만 생성하고 값이 '필요한 시점'이 되었을 때 값을 만드는 방식을 사용
@@ -274,7 +279,6 @@ dir(lst)
 
     ['__add__',
      '__class__',
-     '__class_getitem__',
      '__contains__',
      '__delattr__',
      '__delitem__',
@@ -330,83 +334,6 @@ dir(lst)
 ```
 
 
-
-
-    ['__abs__',
-     '__add__',
-     '__and__',
-     '__bool__',
-     '__ceil__',
-     '__class__',
-     '__delattr__',
-     '__dir__',
-     '__divmod__',
-     '__doc__',
-     '__eq__',
-     '__float__',
-     '__floor__',
-     '__floordiv__',
-     '__format__',
-     '__ge__',
-     '__getattribute__',
-     '__getnewargs__',
-     '__gt__',
-     '__hash__',
-     '__index__',
-     '__init__',
-     '__init_subclass__',
-     '__int__',
-     '__invert__',
-     '__le__',
-     '__lshift__',
-     '__lt__',
-     '__mod__',
-     '__mul__',
-     '__ne__',
-     '__neg__',
-     '__new__',
-     '__or__',
-     '__pos__',
-     '__pow__',
-     '__radd__',
-     '__rand__',
-     '__rdivmod__',
-     '__reduce__',
-     '__reduce_ex__',
-     '__repr__',
-     '__rfloordiv__',
-     '__rlshift__',
-     '__rmod__',
-     '__rmul__',
-     '__ror__',
-     '__round__',
-     '__rpow__',
-     '__rrshift__',
-     '__rshift__',
-     '__rsub__',
-     '__rtruediv__',
-     '__rxor__',
-     '__setattr__',
-     '__sizeof__',
-     '__str__',
-     '__sub__',
-     '__subclasshook__',
-     '__truediv__',
-     '__trunc__',
-     '__xor__',
-     'as_integer_ratio',
-     'bit_length',
-     'conjugate',
-     'denominator',
-     'from_bytes',
-     'imag',
-     'numerator',
-     'real',
-     'to_bytes']
-
-
-
-
 ```python
 # 반복가능한 객체를 이터레이터로 만들기
 lst_it = lst.__iter__()
@@ -420,7 +347,7 @@ lst_it # 이터레이터이므로 값을 바로 꺼내 볼 수는 없음
 
 
 
-    <list_iterator at 0x2709def49a0>
+    <list_iterator at 0x26cbc987bb0>
 
 
 
@@ -520,8 +447,8 @@ lst_it.__next__() # 값이 더이상 없을 때 StopIteration 예외 발생
 
     StopIteration                             Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\236917723.py in <module>
-    ----> 1 lst_it.__next__()
+    <ipython-input-20-b12096e9e653> in <module>
+    ----> 1 lst_it.__next__() # 값이 더이상 없을 때 StopIteration 예외 발생
     
 
     StopIteration: 
@@ -611,8 +538,6 @@ dir(s)
      'lstrip',
      'maketrans',
      'partition',
-     'removeprefix',
-     'removesuffix',
      'replace',
      'rfind',
      'rindex',
@@ -641,7 +566,7 @@ s_it # __iter__ 이 있음
 
 
 
-    <str_iterator at 0x2709def4850>
+    <str_iterator at 0x26cbc987910>
 
 
 
@@ -743,7 +668,6 @@ dir(d) # __iter__ 가 있음
 
 
     ['__class__',
-     '__class_getitem__',
      '__contains__',
      '__delattr__',
      '__delitem__',
@@ -758,19 +682,16 @@ dir(d) # __iter__ 가 있음
      '__hash__',
      '__init__',
      '__init_subclass__',
-     '__ior__',
      '__iter__',
      '__le__',
      '__len__',
      '__lt__',
      '__ne__',
      '__new__',
-     '__or__',
      '__reduce__',
      '__reduce_ex__',
      '__repr__',
      '__reversed__',
-     '__ror__',
      '__setattr__',
      '__setitem__',
      '__sizeof__',
@@ -840,7 +761,7 @@ d_it
 
 
 
-    <dict_keyiterator at 0x2709df2a630>
+    <dict_keyiterator at 0x26cbc999db0>
 
 
 
@@ -878,7 +799,7 @@ next(d_it)
 
     StopIteration                             Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\791955767.py in <module>
+    <ipython-input-36-31659235bc8d> in <module>
     ----> 1 next(d_it)
     
 
@@ -895,7 +816,7 @@ d_it
 
 
 
-    <dict_itemiterator at 0x2709beb5720>
+    <dict_itemiterator at 0x26cbc9946d0>
 
 
 
@@ -909,7 +830,7 @@ d_it
 
 
 
-    <dict_keyiterator at 0x2709df3e180>
+    <dict_keyiterator at 0x26cbc99d540>
 
 
 
@@ -923,7 +844,7 @@ d_it
 
 
 
-    <dict_valueiterator at 0x2709df3e220>
+    <dict_valueiterator at 0x26cbc5d48b0>
 
 
 
@@ -936,7 +857,7 @@ d_it
 
 
 
-    <dict_itemiterator at 0x2709df3e360>
+    <dict_itemiterator at 0x26cbc99dcc0>
 
 
 
@@ -1169,7 +1090,7 @@ range(10)[10]
 
     IndexError                                Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\3677624222.py in <module>
+    <ipython-input-53-0e54eb2a55f8> in <module>
     ----> 1 range(10)[10]
     
 
@@ -1293,11 +1214,11 @@ r.__next__()
 
     StopIteration                             Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\2958564937.py in <module>
+    <ipython-input-61-3a998f5f1be5> in <module>
     ----> 1 r.__next__()
     
 
-    ~\AppData\Local\Temp\ipykernel_7900\70809274.py in __next__(self)
+    <ipython-input-44-2e47fad56a10> in __next__(self)
          16             return r
          17         else: # self.current >= self.stop:
     ---> 18             raise StopIteration
@@ -1320,8 +1241,9 @@ myrange(10)[0]
 
     TypeError                                 Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\243485001.py in <module>
-    ----> 1 myrange(10)[0]
+    <ipython-input-62-6d24f963bcc0> in <module>
+          1 # myrange는 range와 다르게 색인 기능이 지원되지 않음
+    ----> 2 myrange(10)[0]
     
 
     TypeError: 'myrange' object is not subscriptable
@@ -1389,11 +1311,11 @@ r[10] # r.__getitem__(10)
 
     IndexError                                Traceback (most recent call last)
 
-    ~\AppData\Local\Temp\ipykernel_7900\1833576324.py in <module>
+    <ipython-input-67-3df2bca72313> in <module>
     ----> 1 r[10] # r.__getitem__(10)
     
 
-    ~\AppData\Local\Temp\ipykernel_7900\144910044.py in __getitem__(self, index)
+    <ipython-input-63-f3109e6b02d2> in __getitem__(self, index)
           8 
           9         else: # index >= self.stop:
     ---> 10             raise IndexError
@@ -1439,7 +1361,7 @@ for i in myrange(10): # 내부적으로 __getitem()__가 호출되서 순회
     9
     
 
-# 제너레이터
+## 제너레이터
 
 - 이터레이터를 만들어주는 또 다른 방식(**함수**를 사용)
 - 제너레이터는 이터레이터를 생성해 주는 함수
@@ -1479,7 +1401,7 @@ for i in myrange2():
     9
     
 
-# 모듈과 패키지
+## 모듈과 패키지
 
 **모듈을 가져오는 방법**
 
@@ -1840,6 +1762,11 @@ print('hello2 모듈 끝')
 
 ```
 
+    hello2 모듈 시작
+    __main__
+    hello2 모듈 끝
+    
+
 
 ```python
 # hello2.py의 __name__ 에 __main__이 출력
@@ -1980,7 +1907,7 @@ rectangle_area(10, 20)
 
 
 
-# 정규표현식
+## 정규표현식
 
 
 ```python
@@ -2175,8 +2102,5 @@ print(p.match('a\\a'))
     <re.Match object; span=(0, 3), match='a\\a'>
     <re.Match object; span=(0, 3), match='a\\a'>
     
-
-
-```python
-
-```
+## Reference
+[파이썬 코딩 도장](https://dojang.io/course/view.php?id=7)
