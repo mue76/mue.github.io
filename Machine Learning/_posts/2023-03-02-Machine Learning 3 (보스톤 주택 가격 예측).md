@@ -1,3 +1,8 @@
+---
+tag: [machine learning, scikit-learn]
+toc: true
+---
+
 # 보스톤 주택 가격 예측
 
 

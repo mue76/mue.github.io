@@ -1,5 +1,6 @@
 ---
-tag: [python, machine learning, scikit-learn]
+tag: [machine learning, scikit-learn]
+toc: true
 ---
 
 # 로지스틱 회귀

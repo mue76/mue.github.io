@@ -1,5 +1,6 @@
 ---
-tag: [python, machine learning, scikit-learn, california housing price]
+tag: [machine learning, scikit-learn, california housing price]
+toc: true
 ---
 
 # 캘리포니아 주택 가격 예측 모델 만들기

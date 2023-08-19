@@ -1,5 +1,6 @@
 ---
-tag: [python, machine learning, scikit-learn]
+tag: [machine learning, scikit-learn]
+toc: true
 ---
 
 # 분류 평가 지표

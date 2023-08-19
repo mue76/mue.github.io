@@ -1,5 +1,6 @@
 ---
-tag: [python, machine learning, scikit-learn, kaggle titanic dataset]
+tag: [machine learning, scikit-learn, kaggle titanic dataset]
+toc: true
 ---
 
 # 타이타닉 데이터셋 도전

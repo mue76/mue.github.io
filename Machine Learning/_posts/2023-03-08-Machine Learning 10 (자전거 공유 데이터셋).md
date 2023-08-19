@@ -1,5 +1,6 @@
 ---
-tag: [python, machine learning, scikit-learn, kaggle bike sharing]
+tag: [machine learning, scikit-learn, kaggle bike sharing]
+toc: true
 ---
 
 # Bike Sharing Demand
@@ -2143,7 +2144,7 @@ ver = 1
 submission.to_csv('bike_{}_submission.csv'.format(ver), index=False)
 ```
 
-# 더 해볼만한것!
+## 더 해볼만한것!
 - registered와 casual을 각각 예측해서 합산해보는 방법도 있음
 - 더 강력한 모델(boosting 모델)로 도전
 
