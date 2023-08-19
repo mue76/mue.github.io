@@ -199,7 +199,7 @@ frame
 
 
 ```python
-frame.sort_index() # axis=0(기본값) : index를 정렬, axis=1 : column을 정렬렬
+frame.sort_index() # axis=0(기본값) : index를 정렬, axis=1 : column을 정렬
 ```
 
 
@@ -331,7 +331,7 @@ frame.sort_index() # axis=0(기본값) : index를 정렬, axis=1 : column을 정
 
 
 ```python
-frame.sort_index(axis='columns') # axis=1 과 동일, column 을 정렬렬
+frame.sort_index(axis='columns') # axis=1 과 동일, column 을 정렬
 ```
 
 
@@ -600,7 +600,7 @@ frame
 
 
 ```python
-frame.sort_values(by='b') # axis=0 (기본값) : 행축을 따라서 정렬렬
+frame.sort_values(by='b') # axis=0 (기본값) : 행축을 따라서 정렬
 ```
 
 
@@ -5069,7 +5069,7 @@ frame2
 
 ## 8. 데이터 정제 및 준비
 
-### 8.1 누락된 데이터 처리하기기
+### 8.1 누락된 데이터 처리하기
 
 - 결측치 확인, 삭제
 
