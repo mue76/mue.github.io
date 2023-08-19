@@ -1,3 +1,5 @@
+# PCA 활용
+
 ## default of credit card clients dataset
 
 - [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/index.php)의 [
