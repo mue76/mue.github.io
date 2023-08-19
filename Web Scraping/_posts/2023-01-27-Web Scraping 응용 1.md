@@ -5,7 +5,7 @@ toc_sticky: true
 toc_label: 목차
 author_profile: false
 ---
-# Naver, Daum 사이트에서 Web scraping 하기
+# Web scraping 실습
 
 **requests 모듈**
 - 참고 사이트 : https://realpython.com/python-requests/
@@ -107,9 +107,7 @@ with open('mygoogle2.html', 'w', encoding='utf8') as fd:
 
 ```
 
-### 실습 1
-
-**네이버 웹툰** 
+## 1. 네이버 웹툰 데이터 가져오기
 - https://comic.naver.com/webtoon/weekday
 
 
@@ -9913,9 +9911,7 @@ for page in range(1, 22): # page가 1~21까지 변하도록 만듬
     
     
 
-### 실습 2
-
-**다음(daum.net)에서 2022년 영화순위 검색**
+## 2. 다음(daum.net)에서 2022년 영화순위 검색
 - https://search.daum.net/search?w=tot&q=2022%EB%85%84%EC%98%81%ED%99%94%EC%88%9C%EC%9C%84&DA=MOR&rtmaxcoll=MOR
 - 썸네일 이미지 저장하기
 
