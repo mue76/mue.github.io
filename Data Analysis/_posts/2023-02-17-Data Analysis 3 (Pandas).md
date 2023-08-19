@@ -4648,7 +4648,7 @@ Image('./images/image7.png', width=400)
 
 
     
-![png](/assets/images/output_94_0.png)
+![png](/assets/images/2023-02-17-Data Analysis 3 (Pandas)/output_94_0.png)
     
 
 

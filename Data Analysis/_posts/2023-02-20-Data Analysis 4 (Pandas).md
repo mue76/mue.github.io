@@ -2232,7 +2232,7 @@ df.plot(kind='scatter', x='math', y='physics')
 
 
     
-![png](/assets/images/output_31_2.png)
+![png](/assets/images/2023-02-20-Data Analysis 4 (Pandas)/output_31_2.png)
     
 
 
@@ -2737,7 +2737,7 @@ bike.plot(kind='scatter', x='temp', y='count', alpha=0.3)
 
 
     
-![png](/assets/images/output_41_1.png)
+![png](/assets/images/2023-02-20-Data Analysis 4 (Pandas)/output_41_1.png)
     
 
 
@@ -2982,7 +2982,7 @@ titanic['embark_town'].hist()
 
 
     
-![png](/assets/images/output_49_1.png)
+![png](/assets/images/2023-02-20-Data Analysis 4 (Pandas)/output_49_1.png)
     
 
 

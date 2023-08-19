@@ -72,7 +72,7 @@ Image('./images/image1.PNG')
 
 
     
-![png](/assets/images/output_10_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_10_0.png)
     
 
 
@@ -324,7 +324,7 @@ Image('./images/image2.PNG')
 
 
     
-![png](/assets/images/output_30_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_30_0.png)
     
 
 
@@ -689,7 +689,7 @@ Image('./images/image3.PNG')
 
 
     
-![png](/assets/images/output_62_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_62_0.png)
     
 
 
@@ -887,7 +887,7 @@ Image('./images/image4.PNG', width = 500)
 
 
     
-![png](/assets/images/output_77_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_77_0.png)
     
 
 
@@ -1944,7 +1944,7 @@ Image('./images/image5.PNG')
 
 
     
-![png](/assets/images/output_172_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_172_0.png)
     
 
 
@@ -2360,7 +2360,7 @@ Image('./images/image6.png')
 
 
     
-![png](/assets/images/output_208_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_208_0.png)
     
 
 
@@ -2404,7 +2404,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_213_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_213_0.png)
     
 
 
@@ -2435,7 +2435,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_217_0.png)
+![png](/assets/images/2023-02-16-Data Analysis 2 (Numpy)/output_217_0.png)
     
 
 

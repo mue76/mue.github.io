@@ -826,7 +826,7 @@ bike.plot(kind='scatter', x='temp', y='count', alpha=0.3)
 
 
     
-![png](/assets/images/output_31_1.png)
+![png](/assets/images/2023-02-15-Data Analysis 1 (Overview)/output_31_1.png)
     
 
 
@@ -850,7 +850,7 @@ axes[1][1].scatter(bike['humidity'], bike['count'], alpha=0.3) # 습도와 대�
 
 
     
-![png](/assets/images/output_32_1.png)
+![png](/assets/images/2023-02-15-Data Analysis 1 (Overview)/output_32_1.png)
     
 
 
@@ -1281,7 +1281,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_38_0.png)
+![png](/assets/images/2023-02-15-Data Analysis 1 (Overview)/output_38_0.png)
     
 
 

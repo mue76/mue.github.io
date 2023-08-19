@@ -15442,7 +15442,7 @@ Image('./images/reshaping_pivot.png', width=600)
 
 
     
-![png](/assets/images/output_211_0.png)
+![png](/assets/images/2023-02-21-Data Analysis 5 (Pandas)/output_211_0.png)
     
 
 
@@ -15758,7 +15758,7 @@ Image('./images/reshaping_melt.png', width=600)
 
 
     
-![png](/assets/images/output_214_0.png)
+![png](/assets/images/2023-02-21-Data Analysis 5 (Pandas)/output_214_0.png)
     
 
 
@@ -16060,7 +16060,7 @@ Image('./images/long_wide_format.png', width=600)
 
 
     
-![png](/assets/images/output_218_0.png)
+![png](/assets/images/2023-02-21-Data Analysis 5 (Pandas)/output_218_0.png)
     
 
 
