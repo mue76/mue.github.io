@@ -29,7 +29,7 @@ plt.show() # 주피터 노트북에서는 plt.show() 안해줘도 그림이 표�
 
 
     
-![png](/assets/images/output_4_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_4_1.png)
     
 
 
@@ -45,7 +45,7 @@ Image('./images/figure_axes.png')
 
 
     
-![png](/assets/images/output_6_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_6_0.png)
     
 
 
@@ -72,7 +72,7 @@ plt.show()              # Figure.show() 호출
 
 
     
-![png](/assets/images/output_9_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_9_1.png)
     
 
 
@@ -86,7 +86,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_10_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_10_1.png)
     
 
 
@@ -118,7 +118,7 @@ ax.hist(np.random.randn(100))
 
 
     
-![png](/assets/images/output_12_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_12_1.png)
     
 
 
@@ -137,7 +137,7 @@ ax.scatter(np.arange(10), np.arange(10))
 
 
     
-![png](/assets/images/output_13_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_13_1.png)
     
 
 
@@ -153,7 +153,7 @@ print(type(fig), type(axes))
 
 
     
-![png](/assets/images/output_14_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_14_1.png)
     
 
 
@@ -165,7 +165,7 @@ fig, axes = plt.subplots(nrows=2, ncols=5, figsize=(12, 4)) # 정해진 figsize 
 
 
     
-![png](/assets/images/output_15_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_15_0.png)
     
 
 
@@ -180,7 +180,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_17_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_17_0.png)
     
 
 
@@ -193,7 +193,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_18_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_18_0.png)
     
 
 
@@ -206,7 +206,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_19_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_19_0.png)
     
 
 
@@ -410,7 +410,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_21_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_21_0.png)
     
 
 
@@ -422,7 +422,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_22_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_22_0.png)
     
 
 
@@ -440,7 +440,7 @@ df.plot(kind='bar')
 
 
     
-![png](/assets/images/output_23_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_23_1.png)
     
 
 
@@ -455,7 +455,7 @@ Image('./images/plot.png')
 
 
     
-![png](/assets/images/output_25_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_25_0.png)
     
 
 
@@ -468,7 +468,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_26_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_26_0.png)
     
 
 
@@ -480,7 +480,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_27_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_27_0.png)
     
 
 
@@ -492,7 +492,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_28_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_28_1.png)
     
 
 
@@ -504,7 +504,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_29_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_29_0.png)
     
 
 
@@ -520,7 +520,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_31_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_31_0.png)
     
 
 
@@ -539,7 +539,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_33_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_33_0.png)
     
 
 
@@ -561,7 +561,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_35_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_35_0.png)
     
 
 
@@ -585,7 +585,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_37_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_37_0.png)
     
 
 
@@ -608,7 +608,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_39_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_39_0.png)
     
 
 
@@ -636,7 +636,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_41_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_41_0.png)
     
 
 
@@ -652,7 +652,7 @@ Image('./images/axes.png')
 
 
     
-![png](/assets/images/output_43_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_43_0.png)
     
 
 
@@ -704,7 +704,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_45_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_45_0.png)
     
 
 
@@ -729,7 +729,7 @@ Image('./images/1.png')
 
 
     
-![png](/assets/images/output_49_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_49_0.png)
     
 
 
@@ -743,7 +743,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_50_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_50_0.png)
     
 
 
@@ -758,7 +758,7 @@ Image('./images/2.png')
 
 
     
-![png](/assets/images/output_52_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_52_0.png)
     
 
 
@@ -789,7 +789,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_55_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_55_0.png)
     
 
 
@@ -804,7 +804,7 @@ Image('./images/3.png')
 
 
     
-![png](/assets/images/output_57_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_57_0.png)
     
 
 
@@ -821,7 +821,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_58_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_58_0.png)
     
 
 
@@ -836,7 +836,7 @@ Image('./images/4.png')
 
 
     
-![png](/assets/images/output_60_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_60_0.png)
     
 
 
@@ -854,7 +854,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_61_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_61_0.png)
     
 
 
@@ -869,7 +869,7 @@ Image('./images/5.png')
 
 
     
-![png](/assets/images/output_63_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_63_0.png)
     
 
 
@@ -889,7 +889,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_64_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_64_0.png)
     
 
 
@@ -904,7 +904,7 @@ Image('./images/6.png')
 
 
     
-![png](/assets/images/output_66_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_66_0.png)
     
 
 
@@ -924,7 +924,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_67_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_67_0.png)
     
 
 
@@ -939,7 +939,7 @@ Image('./images/7.png')
 
 
     
-![png](/assets/images/output_69_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_69_0.png)
     
 
 
@@ -960,7 +960,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_70_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_70_0.png)
     
 
 
@@ -975,7 +975,7 @@ Image('./images/8.png')
 
 
     
-![png](/assets/images/output_72_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_72_0.png)
     
 
 
@@ -998,7 +998,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_73_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_73_0.png)
     
 
 
@@ -1013,7 +1013,7 @@ Image('./images/9.png')
 
 
     
-![png](/assets/images/output_75_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_75_0.png)
     
 
 
@@ -1047,7 +1047,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_77_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_77_1.png)
     
 
 
@@ -1062,7 +1062,7 @@ Image('./images/10.png')
 
 
     
-![png](/assets/images/output_79_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_79_0.png)
     
 
 
@@ -1112,7 +1112,7 @@ plt.show()
 
 
     
-![png](/assets/images/output_80_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 7 (Matplotlib)/output_80_0.png)
     
 ## Reference
 - [파이썬 라이브러리를 활용한 데이터 분석 (웨스 맥키니 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=315354750)
