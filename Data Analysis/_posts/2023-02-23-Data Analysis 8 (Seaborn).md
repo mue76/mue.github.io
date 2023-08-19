@@ -28,7 +28,7 @@ Image('./images/graph1.png')
 
 
     
-![png](/assets/images2/output_4_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_4_0.png)
     
 
 
@@ -42,7 +42,7 @@ Image('./images/graph2.png')
 
 
     
-![png](/assets/images2/output_5_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_5_0.png)
     
 
 
@@ -56,7 +56,7 @@ Image('./images/graph3.png')
 
 
     
-![png](/assets/images2/output_6_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_6_0.png)
     
 
 
@@ -318,7 +318,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_13_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_13_1.png)
     
 
 
@@ -338,7 +338,7 @@ titanic_df['Age'].hist(bins=20)
 
 
     
-![png](/assets/images2/output_15_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_15_1.png)
     
 
 
@@ -352,7 +352,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_17_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_17_0.png)
     
 
 
@@ -364,7 +364,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_18_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_18_0.png)
     
 
 
@@ -377,7 +377,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_19_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_19_0.png)
     
 
 
@@ -389,7 +389,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_20_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_20_0.png)
     
 
 
@@ -406,7 +406,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_23_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_23_0.png)
     
 
 
@@ -422,7 +422,7 @@ Image('./images/figure vs axes.png', width=500)
 
 
     
-![png](/assets/images2/output_25_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_25_0.png)
     
 
 
@@ -447,7 +447,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_26_2.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_26_2.png)
     
 
 
@@ -473,7 +473,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_29_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_29_1.png)
     
 
 
@@ -492,7 +492,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_30_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_30_1.png)
     
 
 
@@ -512,7 +512,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_31_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_31_1.png)
     
 
 
@@ -532,7 +532,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_32_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_32_1.png)
     
 
 
@@ -545,7 +545,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_33_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_33_0.png)
     
 
 
@@ -594,7 +594,7 @@ sns.barplot(data=titanic_df, x='Age_cat', y='Survived')
 
 
     
-![png](/assets/images2/output_36_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_36_1.png)
     
 
 
@@ -613,7 +613,7 @@ sns.barplot(data=titanic_df, x='Sex', y='Survived')
 
 
     
-![png](/assets/images2/output_37_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_37_1.png)
     
 
 
@@ -632,7 +632,7 @@ sns.barplot(data=titanic_df, x='Sex', y='Survived', hue='Age_cat')
 
 
     
-![png](/assets/images2/output_38_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_38_1.png)
     
 
 
@@ -651,7 +651,7 @@ sns.barplot(data=titanic_df, x='Sex', y='Survived', hue='Pclass')
 
 
     
-![png](/assets/images2/output_39_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_39_1.png)
     
 
 
@@ -674,7 +674,7 @@ sns.barplot(data=titanic_df, x='Pclass', y='Fare', hue='Age_cat')
 
 
     
-![png](/assets/images2/output_41_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_41_1.png)
     
 
 
@@ -692,7 +692,7 @@ sns.pointplot(data=titanic_df, x='Pclass', y='Fare', hue='Age_cat')
 
 
     
-![png](/assets/images2/output_42_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_42_1.png)
     
 
 
@@ -716,7 +716,7 @@ Image('./images/boxplot.png')
 
 
     
-![png](/assets/images2/output_44_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_44_0.png)
     
 
 
@@ -735,7 +735,7 @@ sns.boxplot(data=titanic_df, x='Pclass', y='Age')
 
 
     
-![png](/assets/images2/output_45_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_45_1.png)
     
 
 
@@ -752,7 +752,7 @@ Image('./images/violinplot.png')
 
 
     
-![png](/assets/images2/output_47_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_47_0.png)
     
 
 
@@ -765,7 +765,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_48_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_48_0.png)
     
 
 
@@ -777,7 +777,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_49_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_49_0.png)
     
 
 
@@ -789,7 +789,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_50_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_50_0.png)
     
 
 
@@ -801,7 +801,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_51_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_51_0.png)
     
 
 
@@ -819,7 +819,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_53_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_53_0.png)
     
 
 
@@ -862,7 +862,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_56_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_56_0.png)
     
 
 
@@ -889,7 +889,7 @@ data.plot(kind='pie', autopct='%.2f%%')
 
 
     
-![png](/assets/images2/output_59_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_59_1.png)
     
 
 
@@ -919,7 +919,7 @@ sns.heatmap(data=corr, annot=True, fmt='.2f', cmap='YlGnBu', linewidth=0.5)
 
 
     
-![png](/assets/images2/output_63_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_63_1.png)
     
 
 
@@ -938,7 +938,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_66_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_66_0.png)
     
 
 
@@ -951,7 +951,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_67_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_67_0.png)
     
 
 
@@ -963,7 +963,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_68_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_68_0.png)
     
 
 
@@ -998,7 +998,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_71_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_71_1.png)
     
 
 
@@ -1020,7 +1020,7 @@ axes
 
 
     
-![png](/assets/images2/output_73_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_73_1.png)
     
 
 
@@ -1043,7 +1043,7 @@ plt.show()
 
 
     
-![png](/assets/images2/output_74_1.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_74_1.png)
     
 
 
@@ -1056,7 +1056,7 @@ Image('./images/seaborn1.png')
 
 
     
-![png](/assets/images2/output_75_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_75_0.png)
     
 
 
@@ -1075,7 +1075,7 @@ for index, column in enumerate(cat_columns):
 
 
     
-![png](/assets/images2/output_77_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_77_0.png)
     
 
 
@@ -1088,7 +1088,7 @@ Image('./images/seaborn2.png')
 
 
     
-![png](/assets/images2/output_78_0.png)
+![png](/assets/images/2023-02-23-Data Analysis 8 (Seaborn)/output_78_0.png)
     
 
 
