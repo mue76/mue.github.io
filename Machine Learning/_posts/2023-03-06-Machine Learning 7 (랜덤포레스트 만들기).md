@@ -1,6 +1,8 @@
 ---
 tag: [machine learning, scikit-learn]
 toc: true
+toc_sticky: true
+toc_label: 목차
 ---
 
 ### 랜덤포레스트 모델 만들기

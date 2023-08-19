@@ -1,6 +1,8 @@
 ---
 tag: [machine learning, scikit-learn]
 toc: true
+toc_sticky: true
+toc_label: 목차
 ---
 
 # 분류 평가 지표

@@ -1,6 +1,8 @@
 ---
 tag: [matplotlib, seaborn, 데이터 시각화, data analysis]
 toc: true
+toc_sticky: true
+toc_label: 목차
 ---
 
 # Seaborn

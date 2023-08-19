@@ -1,6 +1,8 @@
 ---
 tag: [python, programming, 파이썬 문법, 기초코딩]
 toc: true
+toc_sticky: true
+toc_label: 목차
 ---
 # 람다표현식, 클래스
 
