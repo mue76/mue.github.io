@@ -3,6 +3,7 @@ tag: [data analysis, kaggle bike sharing]
 toc: true
 toc_sticky: true
 toc_label: 목차
+author_profile: false
 ---
 
 # 데이터 분석

@@ -3,6 +3,7 @@ tag: [pandas, data analysis]
 toc: true
 toc_sticky: true
 toc_label: 목차
+author_profile: false
 ---
 
 # Pandas (2)

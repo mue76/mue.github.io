@@ -3,6 +3,7 @@ tag: [machine learning, scikit-learn]
 toc: true
 toc_sticky: true
 toc_label: 목차
+author_profile: false
 ---
 
 # PCA 활용

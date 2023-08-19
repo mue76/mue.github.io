@@ -3,6 +3,7 @@ tag: [python, 웹스크래핑, Web Scraping, BeautifulSoup, Selenium]
 toc: true
 toc_sticky: true
 toc_label: 목차
+author_profile: false
 ---
 # Selenium을 이용한 Web scraping
 

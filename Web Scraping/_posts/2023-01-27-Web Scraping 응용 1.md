@@ -3,6 +3,7 @@ tag: [python, 웹스크래핑, Web Scraping, BeautifulSoup]
 toc: true
 toc_sticky: true
 toc_label: 목차
+author_profile: false
 ---
 # Naver, Daum 사이트에서 Web scraping 하기
 

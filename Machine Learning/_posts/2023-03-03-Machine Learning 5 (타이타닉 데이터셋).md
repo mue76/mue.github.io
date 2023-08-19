@@ -3,6 +3,7 @@ tag: [machine learning, scikit-learn, kaggle titanic dataset]
 toc: true
 toc_sticky: true
 toc_label: 목차
+author_profile: false
 ---
 
 # 타이타닉 데이터셋 도전
