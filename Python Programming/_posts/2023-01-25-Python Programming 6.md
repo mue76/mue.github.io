@@ -1,5 +1,6 @@
 ---
-tag: [python, 기초코딩]
+tag: [python, programming, 파이썬 문법, 기초코딩]
+toc: true
 ---
 # 예외처리하기, 이터레이터
 

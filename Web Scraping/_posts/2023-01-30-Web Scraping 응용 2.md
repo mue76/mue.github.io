@@ -1,5 +1,6 @@
 ---
-tag: [python, 웹스크래핑, BeautifulSoup, Selenium]
+tag: [python, 웹스크래핑, Web Scraping, BeautifulSoup, Selenium]
+toc: true
 ---
 # Selenium을 이용한 Web scraping
 

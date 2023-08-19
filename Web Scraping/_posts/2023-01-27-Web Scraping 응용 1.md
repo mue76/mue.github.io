@@ -1,5 +1,6 @@
 ---
-tag: [python, 웹스크래핑, BeautifulSoup]
+tag: [python, 웹스크래핑, Web Scraping, BeautifulSoup]
+toc: true
 ---
 # Naver, Daum 사이트에서 Web scraping 하기
 

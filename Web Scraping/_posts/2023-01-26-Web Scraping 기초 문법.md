@@ -1,5 +1,6 @@
 ---
-tag: [python, 웹스크래핑, BeautifulSoup]
+tag: [python, 웹스크래핑, Web Scraping, BeautifulSoup]
+toc: true
 ---
 # 웹 크롤링의 기초개념
 
