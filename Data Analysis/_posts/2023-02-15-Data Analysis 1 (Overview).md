@@ -1,5 +1,6 @@
 ---
-tag: [python, 데이터분석, data analysis overview, kaggle bike sharing]
+tag: [data analysis, kaggle bike sharing]
+toc: true
 ---
 
 # 데이터 분석

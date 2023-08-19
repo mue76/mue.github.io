@@ -1,5 +1,6 @@
 ---
-tag: [python, pandas, data analysis]
+tag: [pandas, data analysis]
+toc: true
 ---
 
 # Pandas (2)

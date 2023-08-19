@@ -1,5 +1,6 @@
 ---
-tag: [python, matplotlib, seaborn, 데이터 시각화, data analysis]
+tag: [matplotlib, seaborn, 데이터 시각화, data analysis]
+toc: true
 ---
 
 # Seaborn

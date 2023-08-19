@@ -1,5 +1,6 @@
 ---
-tag: [python, numpy, data analysis]
+tag: [numpy, data analysis]
+toc: true
 ---
 # Numpy
 

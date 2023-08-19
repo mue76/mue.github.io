@@ -1,5 +1,6 @@
 ---
-tag: [python, matplotlib, 데이터 시각화, data analysis]
+tag: [matplotlib, 데이터 시각화, data analysis]
+toc: true
 ---
 
 # Matplotlib
