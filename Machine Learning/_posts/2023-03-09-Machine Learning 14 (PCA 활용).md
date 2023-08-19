@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # PCA 활용
 
 ## default of credit card clients dataset
@@ -1157,4 +1161,5 @@ X_train_scaled_pca.shape
 
     (24000, 8)
 
-
+## Reference
+- [파이썬 머신러닝 완벽 가이드 (권철민 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=292601583)

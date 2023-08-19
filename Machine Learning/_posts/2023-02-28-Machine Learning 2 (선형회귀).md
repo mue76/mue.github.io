@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # 선형회귀
 
 
@@ -672,4 +676,7 @@ print("규제 추가: ", sgd_reg_l1l2.intercept_, sgd_reg_l1l2.coef_)
 
     규제 없음:  [0.5394774] [0.62043094]
     규제 추가:  [0.59684835] [0.57598861]
+
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)    
     

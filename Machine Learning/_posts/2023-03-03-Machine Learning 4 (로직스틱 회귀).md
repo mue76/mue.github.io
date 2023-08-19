@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # 로지스틱 회귀
 
 
@@ -299,4 +303,5 @@ sm_clf.predict_proba([[5, 2]])
 
     array([[2.43559894e-04, 2.14859516e-01, 7.84896924e-01]])
 
-
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

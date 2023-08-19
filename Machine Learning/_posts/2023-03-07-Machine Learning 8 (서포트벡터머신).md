@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # SVM 모델
 
 
@@ -152,3 +156,5 @@ rbf_kernel_svm_clf.fit(X, y)
                     ('svm_clf', SVC(C=0.001, gamma=5))])
 
 
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

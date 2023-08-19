@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # 군집 (Clustering)
 
 ## 분류 vs 군집
@@ -854,3 +858,5 @@ plot_cluster_with_predict(X, y, cluster_centers, cluster_label, y_pred)
 ![png](/assets/images/2023-03-08-Machine Learning 11 (K-평균)/output_68_0.png)
     
 
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

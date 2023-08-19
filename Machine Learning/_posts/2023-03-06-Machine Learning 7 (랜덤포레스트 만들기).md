@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 ### 랜덤포레스트 모델 만들기
 
 
@@ -626,3 +630,5 @@ accuracy_score(y_test, y_pred_major_votes.reshape(2000,))
     0.872
 
 
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

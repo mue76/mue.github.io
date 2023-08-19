@@ -1,4 +1,8 @@
-## 타이타닉 데이터셋 도전
+---
+tag: [python, machine learning, scikit-learn, kaggle titanic dataset]
+---
+
+# 타이타닉 데이터셋 도전
 
 - 승객의 나이, 성별, 승객 등급, 승선 위치 같은 속성을 기반으로 하여 승객의 생존 여부를 예측하는 것이 목표
 
@@ -1251,3 +1255,6 @@ submission["Survived"] = final_pred
 ver = 10
 submission.to_csv('./datasets/titanic_ver_{}_submission.csv'.format(ver), index=False)
 ```
+
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

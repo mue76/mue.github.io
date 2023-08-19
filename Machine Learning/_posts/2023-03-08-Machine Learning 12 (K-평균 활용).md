@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # 군집 (Clustering)
 
 ## K-평균 활용
@@ -198,3 +202,5 @@ for idx, n_clusters in enumerate(n_colors):
 ![png](/assets/images/2023-03-08-Machine Learning 12 (K-평균 활용)/output_15_0.png)
     
 
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

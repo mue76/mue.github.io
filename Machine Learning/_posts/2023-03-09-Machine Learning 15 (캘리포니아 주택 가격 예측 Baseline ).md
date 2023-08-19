@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn, california housing price]
+---
+
 # 캘리포니아 주택 가격 예측 모델 만들기
 
 
@@ -1674,4 +1678,5 @@ mean_squared_error(y_test, final_predictions2, squared=False) # RMSE
 
     46496.80161722716
 
-
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

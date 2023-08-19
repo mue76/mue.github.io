@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # 결정트리
 
 
@@ -428,3 +432,5 @@ rnd_clf.feature_importances_ # x1 : 42%, x2 : 57% 중요도
     array([0.42253629, 0.57746371])
 
 
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)

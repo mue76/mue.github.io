@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn, kaggle bike sharing]
+---
+
 # Bike Sharing Demand
 
 - 도시 자전거 공유 시스템 사용 예측
@@ -2142,3 +2146,7 @@ submission.to_csv('bike_{}_submission.csv'.format(ver), index=False)
 # 더 해볼만한것!
 - registered와 casual을 각각 예측해서 합산해보는 방법도 있음
 - 더 강력한 모델(boosting 모델)로 도전
+
+
+## Reference
+- [Must Have 머신러닝·딥러닝 문제해결 전략 (신백균 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=292510407)

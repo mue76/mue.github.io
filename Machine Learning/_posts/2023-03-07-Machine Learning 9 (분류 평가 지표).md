@@ -1,3 +1,7 @@
+---
+tag: [python, machine learning, scikit-learn]
+---
+
 # 분류 평가 지표
 
 
@@ -787,4 +791,6 @@ plt.imshow(clean_digit.reshape(28, 28), cmap='binary')
     
 ![png](/assets/images/2023-03-07-Machine Learning 9 (분류 평가 지표)/output_75_1.png)
     
+## Reference
+- [핸즈온 머신러닝 (오렐리앙 제롱 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=237677114)
 
