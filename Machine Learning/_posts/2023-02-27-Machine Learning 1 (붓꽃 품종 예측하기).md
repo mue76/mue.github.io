@@ -463,7 +463,7 @@ plt.show()
 
 
     
-![png](output_21_0.png)
+![png](/assets/images/2023-02-27-Machine Learning 1 (붓꽃 품종 예측하기)/output_21_0.png)
     
 
 
@@ -492,7 +492,7 @@ plt.show()
 
 
     
-![png](output_23_0.png)
+![png](/assets/images/2023-02-27-Machine Learning 1 (붓꽃 품종 예측하기)/output_23_0.png)
     
 
 
@@ -591,7 +591,7 @@ sns.heatmap(data=corr, annot=True, fmt='.2f', cmap='YlGnBu', linewidth=0.5)
 
 
     
-![png](output_25_1.png)
+![png](/assets/images/2023-02-27-Machine Learning 1 (붓꽃 품종 예측하기)/output_25_1.png)
     
 
 
@@ -805,7 +805,7 @@ total = len(y_test)
 
 
 ```python
-correct/total * 100 # 정확도 (%로 계산산)
+correct/total * 100 # 정확도 (%로 계산)
 ```
 
 
@@ -814,15 +814,5 @@ correct/total * 100 # 정확도 (%로 계산산)
     100.0
 
 
-
-
-```python
-19/20 * 100
-```
-
-
-
-
-    95.0
 
 
