@@ -422,7 +422,7 @@ Image('인스턴스와 self.PNG', width=400)
 
 
     
-![png](/assets/images/output_47_0.png)
+![png](/assets/images/2023-01-20-Python Programming 5/output_47_0.png)
     
 
 

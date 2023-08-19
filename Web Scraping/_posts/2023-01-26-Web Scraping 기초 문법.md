@@ -21,7 +21,7 @@ Image('./web crawling.png', width=600)
 
 
     
-![png](/assets/images/output_4_0.png)
+![png](/assets/images/2023-01-26-Web Scraping 기초 문법/output_4_0.png)
     
 
 
@@ -44,7 +44,7 @@ Image('./serverclient.png', width=600)
 
 
     
-![png](/assets/images/output_7_0.png)
+![png](/assets/images/2023-01-26-Web Scraping 기초 문법/output_7_0.png)
     
 
 
@@ -61,7 +61,7 @@ Image('./http.png', width=600)
 
 
     
-![png](/assets/images/output_9_0.png)
+![png](/assets/images/2023-01-26-Web Scraping 기초 문법/output_9_0.png)
     
 
 

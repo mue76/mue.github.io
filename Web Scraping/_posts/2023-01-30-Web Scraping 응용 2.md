@@ -40,7 +40,7 @@ Image('webdriver.png')
 
 
     
-![png](/assets/images/output_5_0.png)
+![png](/assets/images/2023-01-30-Web Scraping 응용 2/output_5_0.png)
     
 
 

@@ -236,7 +236,7 @@ Image('file_mode.png', width=400)
 
 
     
-![png](/assets/images/output_28_0.png)
+![png](/assets/images/2023-01-19-Python Programming 4/output_28_0.png)
     
 
 
