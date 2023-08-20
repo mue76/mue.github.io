@@ -107,21 +107,21 @@ author:
   name             : "Ghyung Hee, Jang"
   avatar           : "/assets/images/my_picture2.jpg"
   bio              : # "아는 지식을 나누는걸 좋아합니다."
-  # location         : "South Korea"
+  location         : "South Korea"
   # email            :
-  # links:
-    # - label: "Email"
-    #   icon: "fas fa-fw fa-envelope-square"
-    #   url: "mailto:mue@naver.com"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:mue@naver.com"
     # - label: "Website"
     #   icon: "fas fa-fw fa-link"
     #   url: "https://mue76.github.io/"
-    # - label: "Facebook"
-    #   icon: "fab fa-fw fa-facebook-square"
-    #   url: "https://www.facebook.com/Ghyunghee/"
-    # - label: "GitHub"
-    #   icon: "fab fa-fw fa-github"
-    #   url: "https://github.com/mue76"
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      url: "https://www.facebook.com/Ghyunghee/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/mue76"
     # - label: "Instagram"
     #   icon: "fab fa-fw fa-instagram"
     #   url: "https://www.instagram.com/ghyunghee/"
@@ -131,9 +131,9 @@ author:
 # Site Footer
 footer:
   links:
-    # - label: "Facebook"
-    #   icon: "fab fa-fw fa-facebook-square"
-    #   url: https://www.facebook.com/Ghyunghee/
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      url: https://www.facebook.com/Ghyunghee/
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/mue76"
@@ -275,7 +275,7 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false
       read_time: true
       comments: true
       share: true
