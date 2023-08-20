@@ -107,12 +107,11 @@ author:
   name             : "Ghyung Hee, Jang"
   avatar           : "/assets/images/my_picture2.jpg"
   bio              : # "아는 지식을 나누는걸 좋아합니다."
-  # location         : "South Korea"
-  # email            :
-  # links:
-  #   - label: "Email"
-  #     icon: "fas fa-fw fa-envelope-square"
-  #     url: "mailto:mue@naver.com"
+  location         : "South Korea"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:mue@naver.com"
   #   # - label: "Website"
     #   icon: "fas fa-fw fa-link"
     #   url: "https://mue76.github.io/"
