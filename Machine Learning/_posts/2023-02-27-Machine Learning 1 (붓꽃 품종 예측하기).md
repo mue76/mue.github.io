@@ -4,6 +4,8 @@ toc: true
 toc_sticky: true
 toc_label: 목차
 author_profile: false
+sidebar:
+  nav: "counts"
 ---
 
 # 붓꽃 품종 예측하기

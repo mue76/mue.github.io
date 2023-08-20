@@ -4,6 +4,8 @@ toc: true
 toc_sticky: true
 toc_label: 목차
 author_profile: false
+sidebar:
+  nav: "counts"
 ---
 # 예외처리하기, 이터레이터
 
