@@ -14,7 +14,7 @@ main:
 
 counts:
   - title: "Category"
-    use: true 
+    use: false 
   - title: "태그"
     use: false
 

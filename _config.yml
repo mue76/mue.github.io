@@ -107,37 +107,39 @@ author:
   name             : "Ghyung Hee, Jang"
   avatar           : "/assets/images/my_picture2.jpg"
   bio              : # "아는 지식을 나누는걸 좋아합니다."
-  location         : "South Korea"
-  email            :
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:mue@naver.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://mue76.github.io/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      url: "https://www.facebook.com/Ghyunghee/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/mue76"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/ghyunghee/"
+  # location         : "South Korea"
+  # email            :
+  # links:
+    # - label: "Email"
+    #   icon: "fas fa-fw fa-envelope-square"
+    #   url: "mailto:mue@naver.com"
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   url: "https://mue76.github.io/"
+    # - label: "Facebook"
+    #   icon: "fab fa-fw fa-facebook-square"
+    #   url: "https://www.facebook.com/Ghyunghee/"
+    # - label: "GitHub"
+    #   icon: "fab fa-fw fa-github"
+    #   url: "https://github.com/mue76"
+    # - label: "Instagram"
+    #   icon: "fab fa-fw fa-instagram"
+    #   url: "https://www.instagram.com/ghyunghee/"
+
+
 
 # Site Footer
 footer:
   links:
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      url: https://www.facebook.com/Ghyunghee/
+    # - label: "Facebook"
+    #   icon: "fab fa-fw fa-facebook-square"
+    #   url: https://www.facebook.com/Ghyunghee/
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/mue76"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/ghyunghee/"
+    # - label: "Instagram"
+    #   icon: "fab fa-fw fa-instagram"
+    #   url: "https://www.instagram.com/ghyunghee/"
 
 
 # Reading Files
@@ -273,11 +275,13 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: ture
+      author_profile: true
       read_time: true
       comments: true
       share: true
       related: true
       show_date: true
+   
 
 date_format: "%Y-%m-%d"
+
