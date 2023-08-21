@@ -1,5 +1,5 @@
 ---
-tag: [Deep Learning, 딥러닝, pytorch, 파이토치, Fashion MNIST]
+tag: [Deep Learning, 딥러닝, pytorch, 파이토치, CNN, Fashion MNIST]
 toc: true
 toc_sticky: true
 toc_label: 목차
@@ -19,7 +19,7 @@ Image('./images/fashion-mnist-sprite.png', width=600)
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 10 (Fashion MNIST in Pytorch (2) 배치정규화, 규제, 모델저장)/output_1_0.png)
+![png](/assets/images/2023-04-10-CNN 1 (Fashion MNIST (1) CNN 기본 모델)/output_1_0.png)
     
 
 
@@ -42,6 +42,46 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
+
+```python
+!nvidia-smi
+```
+
+    Fri Apr  7 04:51:33 2023       
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 525.85.12    Driver Version: 525.85.12    CUDA Version: 12.0     |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |                               |                      |               MIG M. |
+    |===============================+======================+======================|
+    |   0  Tesla T4            Off  | 00000000:00:04.0 Off |                    0 |
+    | N/A   67C    P8    14W /  70W |      0MiB / 15360MiB |      0%      Default |
+    |                               |                      |                  N/A |
+    +-------------------------------+----------------------+----------------------+
+                                                                                   
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                                  |
+    |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+    |        ID   ID                                                   Usage      |
+    |=============================================================================|
+    |  No running processes found                                                 |
+    +-----------------------------------------------------------------------------+
+    
+
+
+```python
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device
+```
+
+
+
+
+    device(type='cuda')
+
+
+
 ## 1. 데이터 불러오기
 
 
@@ -62,7 +102,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw/train-images-idx3-ubyte.gz
     
 
-    100%|██████████| 26421880/26421880 [00:14<00:00, 1809538.75it/s]
+    100%|██████████| 26421880/26421880 [00:01<00:00, 16118765.53it/s]
     
 
     Extracting ./datasets/FashionMNIST/raw/train-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw
@@ -71,7 +111,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw/train-labels-idx1-ubyte.gz
     
 
-    100%|██████████| 29515/29515 [00:00<00:00, 119076.02it/s]
+    100%|██████████| 29515/29515 [00:00<00:00, 269477.25it/s]
     
 
     Extracting ./datasets/FashionMNIST/raw/train-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw
@@ -80,7 +120,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw/t10k-images-idx3-ubyte.gz
     
 
-    100%|██████████| 4422102/4422102 [00:09<00:00, 484805.94it/s] 
+    100%|██████████| 4422102/4422102 [00:00<00:00, 4968875.64it/s]
     
 
     Extracting ./datasets/FashionMNIST/raw/t10k-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw
@@ -89,10 +129,12 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz
     
 
-    100%|██████████| 5148/5148 [00:00<00:00, 3797445.83it/s]
-    
+    100%|██████████| 5148/5148 [00:00<00:00, 5959778.36it/s]
 
     Extracting ./datasets/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw
+    
+    
+
     
     
 
@@ -122,7 +164,7 @@ print(type(testset), len(testset))
 print(trainset[0][0].size(), trainset[0][1])
 ```
 
-    torch.Size([1, 28, 28]) 3
+    torch.Size([1, 28, 28]) 8
     
 
 ## 2. 데이터 시각화
@@ -145,7 +187,7 @@ for i in range(32):
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 10 (Fashion MNIST in Pytorch (2) 배치정규화, 규제, 모델저장)/output_10_0.png)
+![png](/assets/images/2023-04-10-CNN 1 (Fashion MNIST (1) CNN 기본 모델)/output_12_0.png)
     
 
 
@@ -205,14 +247,14 @@ images.size(), labels.size()
 
 ```python
 from IPython.display import Image
-Image('./images/mlp_mnist.png', width=500)
+Image('./images/cnn architecture 2.png', width=700)
 ```
 
 
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 10 (Fashion MNIST in Pytorch (2) 배치정규화, 규제, 모델저장)/output_18_0.png)
+![png](/assets/images/2023-04-10-CNN 1 (Fashion MNIST (1) CNN 기본 모델)/output_20_0.png)
     
 
 
@@ -250,64 +292,57 @@ import torch.nn.functional as F # 파이토치에서 제공하는 함수(활성�
 
 
 ```python
-class FMnist_DNN(nn.Module):
+class FMnist_CNN(nn.Module):
   def __init__(self):
     super().__init__()
-    # linear layer, fully connected layer, affine layer, dense layer : np.dot(x, w) + b
-    self.hidden_linear1 = nn.Linear(in_features=784, out_features=128)    
-    self.batch_norm1 = nn.BatchNorm1d(num_features=128)
-    self.hidden_linear2 = nn.Linear(in_features=128, out_features=64)    
-    self.batch_norm2 = nn.BatchNorm1d(num_features=64)
-    self.ouput_linear = nn.Linear(in_features=64, out_features=10)
+    self.conv_block1 = nn.Sequential(
+                                      nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1),
+                                      nn.ReLU(),
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 32 x 14 x 14
+    self.conv_block2 = nn.Sequential(
+                                      nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1),
+                                      nn.ReLU(),
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 64 x 7 x 7
 
-    # 가중치 초기화 (he초기화)
-    # nn.init.kaiming_normal_(self.hidden_linear1.weight, mode='fan_in', nonlinearity='relu')
-    # nn.init.kaiming_normal_(self.hidden_linear2.weight, mode='fan_in', nonlinearity='relu')
-    # nn.init.kaiming_normal_(self.ouput_linear.weight, mode='fan_in', nonlinearity='relu')
+    self.linear1 = nn.Linear(in_features=64*7*7, out_features=128)
+    self.linear2 = nn.Linear(in_features=128, out_features=10)
 
   def forward(self, x):
-    x = self.hidden_linear1(x)    
-    x = self.batch_norm1(x)
+    x = self.conv_block1(x) # batch_size x 32 x 14 x 14
+    x = self.conv_block2(x) # batch_size x 64 x 7 x 7
+    x = x.view(-1, 64*7*7) # flatten
+    x = self.linear1(x)
     x = F.relu(x)
-    x = F.dropout(x, 0.3)
-    x = self.hidden_linear2(x)  
-    x = self.batch_norm2(x)
-    x = F.relu(x) 
-    x = F.dropout(x, 0.2) 
-    x = self.ouput_linear(x)    
+    x = self.linear2(x)
     return x
 ```
 
 
 ```python
-model = FMnist_DNN()
+model = FMnist_CNN()
+model.to(device)
 model
 ```
 
 
 
 
-    FMnist_DNN(
-      (hidden_linear1): Linear(in_features=784, out_features=128, bias=True)
-      (batch_norm1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (hidden_linear2): Linear(in_features=128, out_features=64, bias=True)
-      (batch_norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (ouput_linear): Linear(in_features=64, out_features=10, bias=True)
+    FMnist_CNN(
+      (conv_block1): Sequential(
+        (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU()
+        (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (conv_block2): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU()
+        (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (linear1): Linear(in_features=3136, out_features=128, bias=True)
+      (linear2): Linear(in_features=128, out_features=10, bias=True)
     )
-
-
-
-
-```python
-model.ouput_linear.bias 
-```
-
-
-
-
-    Parameter containing:
-    tensor([ 0.0612,  0.0867, -0.1179, -0.0624, -0.0185,  0.0005, -0.1098,  0.0449,
-             0.0565, -0.0743], requires_grad=True)
 
 
 
@@ -317,16 +352,14 @@ for name, parameter in model.named_parameters():
   print(name, parameter.size())
 ```
 
-    hidden_linear1.weight torch.Size([128, 784])
-    hidden_linear1.bias torch.Size([128])
-    batch_norm1.weight torch.Size([128])
-    batch_norm1.bias torch.Size([128])
-    hidden_linear2.weight torch.Size([64, 128])
-    hidden_linear2.bias torch.Size([64])
-    batch_norm2.weight torch.Size([64])
-    batch_norm2.bias torch.Size([64])
-    ouput_linear.weight torch.Size([10, 64])
-    ouput_linear.bias torch.Size([10])
+    conv1.weight torch.Size([32, 1, 3, 3])
+    conv1.bias torch.Size([32])
+    conv2.weight torch.Size([64, 32, 3, 3])
+    conv2.bias torch.Size([64])
+    linear1.weight torch.Size([128, 3136])
+    linear1.bias torch.Size([128])
+    linear2.weight torch.Size([10, 128])
+    linear2.bias torch.Size([10])
     
 
 ## 5. 모델 컴파일 (손실함수, 옵티마이저 선택)
@@ -353,6 +386,12 @@ loss_fn = nn.CrossEntropyLoss()
 # 규제의 강도 설정 weight_decay
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 # optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=0.001)
+
+# Learning Rate Schedule
+# https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html
+
+# 모니터링하고 있는 값(예:valid_loss)의 최소값(min) 또는 최대값(max) patience 기간동안 줄어들지 않을 때(OnPlateau) lr에 factor(0.1)를 곱해주는 전략
+scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=4, verbose=True)
 ```
 
 
@@ -363,42 +402,77 @@ from torchsummary import summary
 
 ```python
 # summary(모델, (채널, 인풋사이즈))
-# summary(model, (1, 784))
+summary(model, (1, 28, 28))
 ```
+
+    ----------------------------------------------------------------
+            Layer (type)               Output Shape         Param #
+    ================================================================
+                Conv2d-1           [-1, 32, 28, 28]             320
+                  ReLU-2           [-1, 32, 28, 28]               0
+             MaxPool2d-3           [-1, 32, 14, 14]               0
+                Conv2d-4           [-1, 64, 14, 14]          18,496
+                  ReLU-5           [-1, 64, 14, 14]               0
+             MaxPool2d-6             [-1, 64, 7, 7]               0
+                Linear-7                  [-1, 128]         401,536
+                Linear-8                   [-1, 10]           1,290
+    ================================================================
+    Total params: 421,642
+    Trainable params: 421,642
+    Non-trainable params: 0
+    ----------------------------------------------------------------
+    Input size (MB): 0.00
+    Forward/backward pass size (MB): 0.65
+    Params size (MB): 1.61
+    Estimated Total Size (MB): 2.26
+    ----------------------------------------------------------------
+    
 
 
 ```python
-784*128 + 128
+32 * 3 * 3 + 32
 ```
 
 
 
 
-    100480
+    320
 
 
 
 
 ```python
-128*64 + 64
+64 * (32 * 3 * 3) + 64
 ```
 
 
 
 
-    8256
+    18496
 
 
 
 
 ```python
-64*10 + 10
+3136 * 128 + 128
 ```
 
 
 
 
-    650
+    401536
+
+
+
+
+```python
+128 * 10 + 10
+```
+
+
+
+
+    1290
 
 
 
@@ -424,9 +498,15 @@ def validate(model, validloader, loss_fn):
 
   # 전방향 예측을 구할 때는 gradient가 필요가 없음음
   with torch.no_grad():
-    for images, labels in validloader: # 이터레이터로부터 next()가 호출되며 미니배치 100개씩을 반환(images, labels)
+    for images, labels in validloader: # 이터레이터로부터 next()가 호출되며 미니배치 100개씩을 반환(images, labels)      
+      # images, labels : (torch.Size([16, 1, 28, 28]), torch.Size([16]))
+      # 0. Data를 GPU로 보내기
+      images, labels = images.to(device), labels.to(device)
+
       # 1. 입력 데이터 준비
-      images.resize_(images.size()[0], 784)
+      # not Flatten !!
+      # images.resize_(images.size()[0], 784)
+
       # 2. 전방향(Forward) 예측
       logit = model(images) # 예측 점수
       _, preds = torch.max(logit, 1) # 배치에 대한 최종 예측
@@ -469,88 +549,125 @@ writer = SummaryWriter()
 
 
 ```python
-epochs = 17
-steps = 0
-steps_per_epoch = len(trainloader) 
-min_loss = 1000000
-max_accuracy = 0
+def train_loop(model, trainloader, loss_fn, epochs, optimizer):  
+  steps = 0
+  steps_per_epoch = len(trainloader) 
+  min_loss = 1000000
+  max_accuracy = 0
+  trigger = 0
+  patience = 7 
 
-for epoch in range(epochs):
-  model.train() # 훈련 모드
-  train_loss = 0
-  for images, labels in trainloader: # 이터레이터로부터 next()가 호출되며 미니배치를 반환(images, labels)
-    steps += 1
-  # 1. 입력 데이터 준비
-    images.resize_(images.shape[0], 784) 
+  for epoch in range(epochs):
+    model.train() # 훈련 모드
+    train_loss = 0
+    for images, labels in trainloader: # 이터레이터로부터 next()가 호출되며 미니배치를 반환(images, labels)
+      steps += 1
+      # images, labels : (torch.Size([16, 1, 28, 28]), torch.Size([16]))
+      # 0. Data를 GPU로 보내기
+      images, labels = images.to(device), labels.to(device)
 
-  # 2. 전방향(forward) 예측
-    predict = model(images) # 예측 점수
-    loss = loss_fn(predict, labels) # 예측 점수와 정답을 CrossEntropyLoss에 넣어 Loss값 반환
+      # 1. 입력 데이터 준비
+      # not Flatten !!
+      # images.resize_(images.shape[0], 784) 
 
-  # 3. 역방향(backward) 오차(Gradient) 전파
-    optimizer.zero_grad() # Gradient가 누적되지 않게 하기 위해
-    loss.backward() # 모델파리미터들의 Gradient 전파
+      # 2. 전방향(forward) 예측
+      predict = model(images) # 예측 점수
+      loss = loss_fn(predict, labels) # 예측 점수와 정답을 CrossEntropyLoss에 넣어 Loss값 반환
 
-  # 4. 경사 하강법으로 모델 파라미터 업데이트
-    optimizer.step() # W <- W -lr*Gradient
+      # 3. 역방향(backward) 오차(Gradient) 전파
+      optimizer.zero_grad() # Gradient가 누적되지 않게 하기 위해
+      loss.backward() # 모델파리미터들의 Gradient 전파
 
-    train_loss += loss.item()
-    if (steps % steps_per_epoch) == 0 : 
-      model.eval() # 평가 모드 : 평가에서 사용하지 않을 계층(배치 정규화, 드롭아웃)들을 수행하지 않게 하기 위해서
-      valid_loss, valid_accuracy = validate(model, validloader, loss_fn)
+      # 4. 경사 하강법으로 모델 파라미터 업데이트
+      optimizer.step() # W <- W -lr*Gradient
 
-      # tensorboard 시각화를 위한 로그 이벤트 등록
-      writer.add_scalar('Train Loss', train_loss/len(trainloader), epoch+1)
-      writer.add_scalar('Valid Loss', valid_loss/len(validloader), epoch+1)
-      writer.add_scalars('Train Loss and Valid Loss',
-                         {'Train' : train_loss/len(trainloader),
-                          'Valid' : valid_loss/len(validloader)}, epoch+1)
-      writer.add_scalar('Valid Accuracy', valid_accuracy, epoch+1)
-      # -------------------------------------------
+      train_loss += loss.item()
+      if (steps % steps_per_epoch) == 0 : 
+        model.eval() # 평가 모드 : 평가에서 사용하지 않을 계층(배치 정규화, 드롭아웃)들을 수행하지 않게 하기 위해서
+        valid_loss, valid_accuracy = validate(model, validloader, loss_fn)
 
-      print('Epoch : {}/{}.......'.format(epoch+1, epochs),            
-            'Train Loss : {:.3f}'.format(train_loss/len(trainloader)), 
-            'Valid Loss : {:.3f}'.format(valid_loss/len(validloader)), 
-            'Valid Accuracy : {:.3f}'.format(valid_accuracy)            
-            )
-      
-      # Best model 저장    
-      # option 1 : valid_loss 모니터링
-      if valid_loss < min_loss: # 바로 이전 epoch의 loss보다 작으면 저장하기
-        min_loss = valid_loss
-        torch.save(model.state_dict(), 'best_checkpoint.pth')      
-      
-      # option 2 : valid_accuracy 모니터링      
-      # if valid_accuracy > max_accuracy : # 바로 이전 epoch의 accuracy보다 크면 저장하기
-      #   max_accuracy = valid_accuracy
-      #   torch.save(model.state_dict(), 'best_checkpoint.pth')  
-      # -------------------------------------------
-      
-writer.flush()      
+        # tensorboard 시각화를 위한 로그 이벤트 등록
+        writer.add_scalar('Train Loss', train_loss/len(trainloader), epoch+1)
+        writer.add_scalar('Valid Loss', valid_loss/len(validloader), epoch+1)
+        writer.add_scalars('Train Loss and Valid Loss',
+                          {'Train' : train_loss/len(trainloader),
+                            'Valid' : valid_loss/len(validloader)}, epoch+1)
+        writer.add_scalar('Valid Accuracy', valid_accuracy, epoch+1)
+        # -------------------------------------------
+
+        print('Epoch : {}/{}.......'.format(epoch+1, epochs),            
+              'Train Loss : {:.3f}'.format(train_loss/len(trainloader)), 
+              'Valid Loss : {:.3f}'.format(valid_loss/len(validloader)), 
+              'Valid Accuracy : {:.3f}'.format(valid_accuracy)            
+              )
+        
+        # Best model 저장    
+        # option 1 : valid_loss 모니터링
+        # if valid_loss < min_loss: # 바로 이전 epoch의 loss보다 작으면 저장하기
+        #   min_loss = valid_loss
+        #   torch.save(model.state_dict(), 'best_checkpoint.pth')      
+        
+        # option 2 : valid_accuracy 모니터링      
+        if valid_accuracy > max_accuracy : # 바로 이전 epoch의 accuracy보다 크면 저장하기
+          max_accuracy = valid_accuracy
+          torch.save(model.state_dict(), 'best_checkpoint.pth')  
+        # -------------------------------------------
+
+        # Early Stopping (조기 종료)
+        if valid_loss > min_loss: # valid_loss가 min_loss를 갱신하지 못하면
+          trigger += 1
+          print('trigger : ', trigger)
+          if trigger > patience:
+            print('Early Stopping !!!')
+            print('Training loop is finished !!')
+            writer.flush()   
+            return
+        else:
+          trigger = 0
+          min_loss = valid_loss
+        # -------------------------------------------
+
+        # Learning Rate Scheduler
+        scheduler.step(valid_loss)
+        # -------------------------------------------
+        
+  writer.flush()
+  return  
 ```
 
-    Epoch : 1/17....... Train Loss : 0.635 Valid Loss : 0.467 Valid Accuracy : 0.835
-    Epoch : 2/17....... Train Loss : 0.495 Valid Loss : 0.427 Valid Accuracy : 0.848
-    Epoch : 3/17....... Train Loss : 0.458 Valid Loss : 0.409 Valid Accuracy : 0.856
-    Epoch : 4/17....... Train Loss : 0.433 Valid Loss : 0.409 Valid Accuracy : 0.852
-    Epoch : 5/17....... Train Loss : 0.420 Valid Loss : 0.381 Valid Accuracy : 0.865
-    Epoch : 6/17....... Train Loss : 0.405 Valid Loss : 0.381 Valid Accuracy : 0.861
-    Epoch : 7/17....... Train Loss : 0.394 Valid Loss : 0.373 Valid Accuracy : 0.868
-    Epoch : 8/17....... Train Loss : 0.387 Valid Loss : 0.367 Valid Accuracy : 0.872
-    Epoch : 9/17....... Train Loss : 0.380 Valid Loss : 0.363 Valid Accuracy : 0.871
-    Epoch : 10/17....... Train Loss : 0.374 Valid Loss : 0.363 Valid Accuracy : 0.871
-    Epoch : 11/17....... Train Loss : 0.366 Valid Loss : 0.364 Valid Accuracy : 0.869
-    Epoch : 12/17....... Train Loss : 0.359 Valid Loss : 0.362 Valid Accuracy : 0.870
-    Epoch : 13/17....... Train Loss : 0.358 Valid Loss : 0.367 Valid Accuracy : 0.869
-    Epoch : 14/17....... Train Loss : 0.350 Valid Loss : 0.349 Valid Accuracy : 0.879
-    Epoch : 15/17....... Train Loss : 0.346 Valid Loss : 0.353 Valid Accuracy : 0.872
-    Epoch : 16/17....... Train Loss : 0.339 Valid Loss : 0.357 Valid Accuracy : 0.870
-    Epoch : 17/17....... Train Loss : 0.340 Valid Loss : 0.353 Valid Accuracy : 0.875
+
+```python
+epochs = 50
+train_loop(model, trainloader, loss_fn, epochs, optimizer)
+```
+
+    Epoch : 1/50....... Train Loss : 0.404 Valid Loss : 0.296 Valid Accuracy : 0.889
+    Epoch : 2/50....... Train Loss : 0.259 Valid Loss : 0.289 Valid Accuracy : 0.896
+    Epoch : 3/50....... Train Loss : 0.212 Valid Loss : 0.234 Valid Accuracy : 0.914
+    Epoch : 4/50....... Train Loss : 0.177 Valid Loss : 0.246 Valid Accuracy : 0.908
+    trigger :  1
+    Epoch : 5/50....... Train Loss : 0.149 Valid Loss : 0.235 Valid Accuracy : 0.916
+    trigger :  2
+    Epoch : 6/50....... Train Loss : 0.125 Valid Loss : 0.283 Valid Accuracy : 0.908
+    trigger :  3
+    Epoch : 7/50....... Train Loss : 0.104 Valid Loss : 0.274 Valid Accuracy : 0.913
+    trigger :  4
+    Epoch : 8/50....... Train Loss : 0.087 Valid Loss : 0.309 Valid Accuracy : 0.916
+    trigger :  5
+    Epoch 00008: reducing learning rate of group 0 to 1.0000e-04.
+    Epoch : 9/50....... Train Loss : 0.042 Valid Loss : 0.285 Valid Accuracy : 0.925
+    trigger :  6
+    Epoch : 10/50....... Train Loss : 0.032 Valid Loss : 0.299 Valid Accuracy : 0.925
+    trigger :  7
+    Epoch : 11/50....... Train Loss : 0.026 Valid Loss : 0.309 Valid Accuracy : 0.925
+    trigger :  8
+    Early Stopping !!!
+    Training loop is finished !!
     
 
 
 ```python
-#%load_ext tensorboard
+# %load_ext tensorboard
 ```
 
 
@@ -574,42 +691,50 @@ writer.close()
 # testloader에서 미니 배치 가져오기
 test_iter = iter(testloader)
 images, labels = next(test_iter)
+images, labels = images.to(device), labels.to(device)
 print(images.size(), labels.size())
 
 # random한 index로 이미지 한장 준비하기
 rnd_idx = 10
 print(images[rnd_idx].shape, labels[rnd_idx])
-flattend_img = images[rnd_idx].view(1, 784)
+```
+
+    torch.Size([16, 1, 28, 28]) torch.Size([16])
+    torch.Size([1, 28, 28]) tensor(4, device='cuda:0')
+    
+
+
+```python
+# not Flatten!
+# flattend_img = images[rnd_idx].view(1, 784)
 
 # 준비된 이미지로 예측하기
 model.eval()
 with torch.no_grad():
-  logit = model(flattend_img)
+  logit = model(images[rnd_idx])
 
 pred = logit.max(dim=1)[1]
 print(pred == labels[rnd_idx]) # True : 잘 예측
 ```
 
-    torch.Size([16, 1, 28, 28]) torch.Size([16])
-    torch.Size([1, 28, 28]) tensor(4)
-    tensor([True])
+    tensor([True], device='cuda:0')
     
 
 
 ```python
-plt.imshow(images[rnd_idx].squeeze(), cmap='gray')
+plt.imshow(images[rnd_idx].squeeze().cpu(), cmap='gray')
 ```
 
 
 
 
-    <matplotlib.image.AxesImage at 0x7f0784f48df0>
+    <matplotlib.image.AxesImage at 0x7f367fe04370>
 
 
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 10 (Fashion MNIST in Pytorch (2) 배치정규화, 규제, 모델저장)/output_47_1.png)
+![png](/assets/images/2023-04-10-CNN 1 (Fashion MNIST (1) CNN 기본 모델)/output_51_1.png)
     
 
 
@@ -626,8 +751,13 @@ def evaluation(model, testloader, loss_fn):
   # 전방향 예측을 구할 때는 gradient가 필요가 없음음
   with torch.no_grad():
     for images, labels in testloader: # 이터레이터로부터 next()가 호출되며 미니배치 100개씩을 반환(images, labels)
+      # 0. Data를 GPU로 보내기
+      images, labels = images.to(device), labels.to(device)
+
       # 1. 입력 데이터 준비
-      images.resize_(images.size()[0], 784)
+      # not Flatten
+      # images.resize_(images.size()[0], 784)
+      
       # 2. 전방향(Forward) 예측
       logit = model(images) # 예측 점수
       _, preds = torch.max(logit, 1) # 100개에 대한 최종 예측
@@ -647,7 +777,7 @@ model.eval()
 evaluation(model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.383 Test Accuracy : 0.864
+    Test Loss : 0.326 Test Accuracy : 0.927
     
 
 ## 9. 모델 저장
@@ -671,7 +801,7 @@ model.state_dict().keys()
 
 
 
-    odict_keys(['hidden_linear1.weight', 'hidden_linear1.bias', 'batch_norm1.weight', 'batch_norm1.bias', 'batch_norm1.running_mean', 'batch_norm1.running_var', 'batch_norm1.num_batches_tracked', 'hidden_linear2.weight', 'hidden_linear2.bias', 'batch_norm2.weight', 'batch_norm2.bias', 'batch_norm2.running_mean', 'batch_norm2.running_var', 'batch_norm2.num_batches_tracked', 'ouput_linear.weight', 'ouput_linear.bias'])
+    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block2.0.weight', 'conv_block2.0.bias', 'linear1.weight', 'linear1.bias', 'linear2.weight', 'linear2.bias'])
 
 
 
@@ -694,7 +824,7 @@ last_state_dict.keys()
 
 
 
-    odict_keys(['hidden_linear1.weight', 'hidden_linear1.bias', 'batch_norm1.weight', 'batch_norm1.bias', 'batch_norm1.running_mean', 'batch_norm1.running_var', 'batch_norm1.num_batches_tracked', 'hidden_linear2.weight', 'hidden_linear2.bias', 'batch_norm2.weight', 'batch_norm2.bias', 'batch_norm2.running_mean', 'batch_norm2.running_var', 'batch_norm2.num_batches_tracked', 'ouput_linear.weight', 'ouput_linear.bias'])
+    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block2.0.weight', 'conv_block2.0.bias', 'linear1.weight', 'linear1.bias', 'linear2.weight', 'linear2.bias'])
 
 
 
@@ -702,7 +832,8 @@ last_state_dict.keys()
 ```python
 # 읽어들인 모델 파라미터는 모델 아키텍처에 연결을 시켜줘야 함
 # load_state_dict() 사용
-last_model = FMnist_DNN()
+last_model = FMnist_CNN()
+last_model.to(device)
 last_model.load_state_dict(last_state_dict)
 ```
 
@@ -719,14 +850,15 @@ last_model.eval()
 evaluation(last_model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.380 Test Accuracy : 0.862
+    Test Loss : 0.326 Test Accuracy : 0.927
     
 
 
 ```python
 # valid loss or accuracy 기준 best model
 best_state_dict = torch.load('best_checkpoint.pth')
-best_model = FMnist_DNN()
+best_model = FMnist_CNN()
+best_model.to(device)
 best_model.load_state_dict(best_state_dict)
 ```
 
@@ -743,5 +875,5 @@ best_model.eval()
 evaluation(best_model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.380 Test Accuracy : 0.863
+    Test Loss : 0.317 Test Accuracy : 0.927
     

@@ -1,5 +1,5 @@
 ---
-tag: [Deep Learning, 딥러닝, pytorch, 파이토치]
+tag: [Deep Learning, 딥러닝, pytorch, 파이토치, Fashion MNIST]
 toc: true
 toc_sticky: true
 toc_label: 목차

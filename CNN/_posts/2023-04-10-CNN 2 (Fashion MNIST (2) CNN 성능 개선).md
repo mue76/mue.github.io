@@ -1,12 +1,11 @@
 ---
-tag: [Deep Learning, 딥러닝, pytorch, 파이토치, Fashion MNIST]
+tag: [Deep Learning, 딥러닝, pytorch, 파이토치, CNN]
 toc: true
 toc_sticky: true
 toc_label: 목차
 author_profile: false
 
 ---
-
 # 신경망 학습 (Fashion MNIST in Pytorch)
 
 
@@ -19,7 +18,7 @@ Image('./images/fashion-mnist-sprite.png', width=600)
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 11 (Fashion MNIST in Pytorch (3) 조기 종료, LR Schedule)/output_1_0.png)
+![png](/assets/images/2023-04-10-CNN 2 (Fashion MNIST (2) CNN 성능 개선)/output_1_0.png)
     
 
 
@@ -42,6 +41,46 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
+
+```python
+!nvidia-smi
+```
+
+    Fri Apr  7 06:40:29 2023       
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 525.85.12    Driver Version: 525.85.12    CUDA Version: 12.0     |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |                               |                      |               MIG M. |
+    |===============================+======================+======================|
+    |   0  Tesla T4            Off  | 00000000:00:04.0 Off |                    0 |
+    | N/A   54C    P8    10W /  70W |      0MiB / 15360MiB |      0%      Default |
+    |                               |                      |                  N/A |
+    +-------------------------------+----------------------+----------------------+
+                                                                                   
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                                  |
+    |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+    |        ID   ID                                                   Usage      |
+    |=============================================================================|
+    |  No running processes found                                                 |
+    +-----------------------------------------------------------------------------+
+    
+
+
+```python
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device
+```
+
+
+
+
+    device(type='cuda')
+
+
+
 ## 1. 데이터 불러오기
 
 
@@ -62,7 +101,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw/train-images-idx3-ubyte.gz
     
 
-    100%|██████████| 26421880/26421880 [00:01<00:00, 14781198.07it/s]
+    100%|██████████| 26421880/26421880 [00:01<00:00, 15166229.33it/s]
     
 
     Extracting ./datasets/FashionMNIST/raw/train-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw
@@ -71,7 +110,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw/train-labels-idx1-ubyte.gz
     
 
-    100%|██████████| 29515/29515 [00:00<00:00, 269222.32it/s]
+    100%|██████████| 29515/29515 [00:00<00:00, 269254.52it/s]
     
 
     Extracting ./datasets/FashionMNIST/raw/train-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw
@@ -80,7 +119,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw/t10k-images-idx3-ubyte.gz
     
 
-    100%|██████████| 4422102/4422102 [00:00<00:00, 5060671.70it/s]
+    100%|██████████| 4422102/4422102 [00:00<00:00, 5091846.11it/s]
     
 
     Extracting ./datasets/FashionMNIST/raw/t10k-images-idx3-ubyte.gz to ./datasets/FashionMNIST/raw
@@ -89,7 +128,7 @@ testset = datasets.FashionMNIST('./datasets/', download=True, train=False, trans
     Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz
     
 
-    100%|██████████| 5148/5148 [00:00<00:00, 9841511.85it/s]
+    100%|██████████| 5148/5148 [00:00<00:00, 6036420.74it/s]
 
     Extracting ./datasets/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz to ./datasets/FashionMNIST/raw
     
@@ -124,7 +163,7 @@ print(type(testset), len(testset))
 print(trainset[0][0].size(), trainset[0][1])
 ```
 
-    torch.Size([1, 28, 28]) 8
+    torch.Size([1, 28, 28]) 1
     
 
 ## 2. 데이터 시각화
@@ -147,7 +186,7 @@ for i in range(32):
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 11 (Fashion MNIST in Pytorch (3) 조기 종료, LR Schedule)/output_10_0.png)
+![png](/assets/images/2023-04-10-CNN 2 (Fashion MNIST (2) CNN 성능 개선)/output_12_0.png)
     
 
 
@@ -207,14 +246,14 @@ images.size(), labels.size()
 
 ```python
 from IPython.display import Image
-Image('./images/mlp_mnist.png', width=500)
+Image('./images/cnn architecture 2.png', width=700)
 ```
 
 
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 11 (Fashion MNIST in Pytorch (3) 조기 종료, LR Schedule)/output_18_0.png)
+![png](/assets/images/2023-04-10-CNN 2 (Fashion MNIST (2) CNN 성능 개선)/output_20_0.png)
     
 
 
@@ -250,66 +289,90 @@ import torch.nn.functional as F # 파이토치에서 제공하는 함수(활성�
 - 파라미터 관리가 필요없는 기능(활성화 함수, ...) 함수형(functional)으로 작성
 - 함수형이란 출력이 입력에 의해 결정
 
+**모델 바뀐점**
+- conv_block 추가
+- batch noramalization 추가
+- drop out 추가
+
 
 ```python
-class FMnist_DNN(nn.Module):
+class FMnist_CNN(nn.Module):
   def __init__(self):
     super().__init__()
-    # linear layer, fully connected layer, affine layer, dense layer : np.dot(x, w) + b
-    self.hidden_linear1 = nn.Linear(in_features=784, out_features=128)    
-    self.batch_norm1 = nn.BatchNorm1d(num_features=128)
-    self.hidden_linear2 = nn.Linear(in_features=128, out_features=64)    
-    self.batch_norm2 = nn.BatchNorm1d(num_features=64)
-    self.ouput_linear = nn.Linear(in_features=64, out_features=10)
+    self.conv_block1 = nn.Sequential(
+                                      nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1),
+                                      nn.BatchNorm2d(num_features=32),
+                                      nn.ReLU(),
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 32 x 14 x 14
+    self.conv_block2 = nn.Sequential(
+                                      nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1),
+                                      nn.BatchNorm2d(num_features=64),
+                                      nn.Dropout(0.2),
+                                      nn.ReLU(),
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 64 x 7 x 7
 
-    # 가중치 초기화 (he초기화)
-    # nn.init.kaiming_normal_(self.hidden_linear1.weight, mode='fan_in', nonlinearity='relu')
-    # nn.init.kaiming_normal_(self.hidden_linear2.weight, mode='fan_in', nonlinearity='relu')
-    # nn.init.kaiming_normal_(self.ouput_linear.weight, mode='fan_in', nonlinearity='relu')
+    self.conv_block3 = nn.Sequential(
+                                      nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1),
+                                      nn.BatchNorm2d(num_features=128),
+                                      nn.Dropout(0.4),
+                                      nn.ReLU(),
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 128 x 3 x 3                                   
+
+    self.linear1 = nn.Linear(in_features=128*3*3, out_features=128)
+    self.batch_norm = nn.BatchNorm1d(num_features=128)
+    self.linear2 = nn.Linear(in_features=128, out_features=10)
 
   def forward(self, x):
-    x = self.hidden_linear1(x)    
-    x = self.batch_norm1(x)
+    x = self.conv_block1(x) # batch_size x 32 x 14 x 14
+    x = self.conv_block2(x) # batch_size x 64 x 7 x 7
+    x = self.conv_block3(x) # batch_size x 64 x 7 x 7
+    x = x.view(-1, 128*3*3) # flatten
+    x = self.linear1(x)
+    x = self.batch_norm(x)
+    x = F.dropout(x, 0.5)
     x = F.relu(x)
-    x = F.dropout(x, 0.3)
-    x = self.hidden_linear2(x)  
-    x = self.batch_norm2(x)
-    x = F.relu(x) 
-    x = F.dropout(x, 0.2) 
-    x = self.ouput_linear(x)    
+    x = self.linear2(x)
     return x
 ```
 
 
 ```python
-model = FMnist_DNN()
+model = FMnist_CNN()
+model.to(device)
 model
 ```
 
 
 
 
-    FMnist_DNN(
-      (hidden_linear1): Linear(in_features=784, out_features=128, bias=True)
-      (batch_norm1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (hidden_linear2): Linear(in_features=128, out_features=64, bias=True)
-      (batch_norm2): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (ouput_linear): Linear(in_features=64, out_features=10, bias=True)
+    FMnist_CNN(
+      (conv_block1): Sequential(
+        (0): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU()
+        (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (conv_block2): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Dropout(p=0.2, inplace=False)
+        (3): ReLU()
+        (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (conv_block3): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Dropout(p=0.4, inplace=False)
+        (3): ReLU()
+        (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      )
+      (linear1): Linear(in_features=1152, out_features=128, bias=True)
+      (batch_norm): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (linear2): Linear(in_features=128, out_features=10, bias=True)
     )
-
-
-
-
-```python
-model.ouput_linear.bias 
-```
-
-
-
-
-    Parameter containing:
-    tensor([ 0.0907, -0.0059, -0.1079, -0.0249,  0.0370,  0.0112,  0.0772, -0.0539,
-             0.0340,  0.0759], requires_grad=True)
 
 
 
@@ -319,16 +382,24 @@ for name, parameter in model.named_parameters():
   print(name, parameter.size())
 ```
 
-    hidden_linear1.weight torch.Size([128, 784])
-    hidden_linear1.bias torch.Size([128])
-    batch_norm1.weight torch.Size([128])
-    batch_norm1.bias torch.Size([128])
-    hidden_linear2.weight torch.Size([64, 128])
-    hidden_linear2.bias torch.Size([64])
-    batch_norm2.weight torch.Size([64])
-    batch_norm2.bias torch.Size([64])
-    ouput_linear.weight torch.Size([10, 64])
-    ouput_linear.bias torch.Size([10])
+    conv_block1.0.weight torch.Size([32, 1, 3, 3])
+    conv_block1.0.bias torch.Size([32])
+    conv_block1.1.weight torch.Size([32])
+    conv_block1.1.bias torch.Size([32])
+    conv_block2.0.weight torch.Size([64, 32, 3, 3])
+    conv_block2.0.bias torch.Size([64])
+    conv_block2.1.weight torch.Size([64])
+    conv_block2.1.bias torch.Size([64])
+    conv_block3.0.weight torch.Size([128, 64, 3, 3])
+    conv_block3.0.bias torch.Size([128])
+    conv_block3.1.weight torch.Size([128])
+    conv_block3.1.bias torch.Size([128])
+    linear1.weight torch.Size([128, 1152])
+    linear1.bias torch.Size([128])
+    batch_norm.weight torch.Size([128])
+    batch_norm.bias torch.Size([128])
+    linear2.weight torch.Size([10, 128])
+    linear2.bias torch.Size([10])
     
 
 ## 5. 모델 컴파일 (손실함수, 옵티마이저 선택)
@@ -371,42 +442,86 @@ from torchsummary import summary
 
 ```python
 # summary(모델, (채널, 인풋사이즈))
-# summary(model, (1, 784))
+summary(model, (1, 28, 28))
 ```
+
+    ----------------------------------------------------------------
+            Layer (type)               Output Shape         Param #
+    ================================================================
+                Conv2d-1           [-1, 32, 28, 28]             320
+           BatchNorm2d-2           [-1, 32, 28, 28]              64
+                  ReLU-3           [-1, 32, 28, 28]               0
+             MaxPool2d-4           [-1, 32, 14, 14]               0
+                Conv2d-5           [-1, 64, 14, 14]          18,496
+           BatchNorm2d-6           [-1, 64, 14, 14]             128
+               Dropout-7           [-1, 64, 14, 14]               0
+                  ReLU-8           [-1, 64, 14, 14]               0
+             MaxPool2d-9             [-1, 64, 7, 7]               0
+               Conv2d-10            [-1, 128, 7, 7]          73,856
+          BatchNorm2d-11            [-1, 128, 7, 7]             256
+              Dropout-12            [-1, 128, 7, 7]               0
+                 ReLU-13            [-1, 128, 7, 7]               0
+            MaxPool2d-14            [-1, 128, 3, 3]               0
+               Linear-15                  [-1, 128]         147,584
+          BatchNorm1d-16                  [-1, 128]             256
+               Linear-17                   [-1, 10]           1,290
+    ================================================================
+    Total params: 242,250
+    Trainable params: 242,250
+    Non-trainable params: 0
+    ----------------------------------------------------------------
+    Input size (MB): 0.00
+    Forward/backward pass size (MB): 1.23
+    Params size (MB): 0.92
+    Estimated Total Size (MB): 2.16
+    ----------------------------------------------------------------
+    
 
 
 ```python
-784*128 + 128
+32 * 3 * 3 + 32
 ```
 
 
 
 
-    100480
+    320
 
 
 
 
 ```python
-128*64 + 64
+64 * (32 * 3 * 3) + 64
 ```
 
 
 
 
-    8256
+    18496
 
 
 
 
 ```python
-64*10 + 10
+3136 * 128 + 128
 ```
 
 
 
 
-    650
+    401536
+
+
+
+
+```python
+128 * 10 + 10
+```
+
+
+
+
+    1290
 
 
 
@@ -432,9 +547,15 @@ def validate(model, validloader, loss_fn):
 
   # 전방향 예측을 구할 때는 gradient가 필요가 없음음
   with torch.no_grad():
-    for images, labels in validloader: # 이터레이터로부터 next()가 호출되며 미니배치 100개씩을 반환(images, labels)
+    for images, labels in validloader: # 이터레이터로부터 next()가 호출되며 미니배치 100개씩을 반환(images, labels)      
+      # images, labels : (torch.Size([16, 1, 28, 28]), torch.Size([16]))
+      # 0. Data를 GPU로 보내기
+      images, labels = images.to(device), labels.to(device)
+
       # 1. 입력 데이터 준비
-      images.resize_(images.size()[0], 784)
+      # not Flatten !!
+      # images.resize_(images.size()[0], 784)
+
       # 2. 전방향(Forward) 예측
       logit = model(images) # 예측 점수
       _, preds = torch.max(logit, 1) # 배치에 대한 최종 예측
@@ -477,6 +598,11 @@ writer = SummaryWriter()
 
 
 ```python
+from copy import deepcopy
+```
+
+
+```python
 def train_loop(model, trainloader, loss_fn, epochs, optimizer):  
   steps = 0
   steps_per_epoch = len(trainloader) 
@@ -490,18 +616,23 @@ def train_loop(model, trainloader, loss_fn, epochs, optimizer):
     train_loss = 0
     for images, labels in trainloader: # 이터레이터로부터 next()가 호출되며 미니배치를 반환(images, labels)
       steps += 1
-    # 1. 입력 데이터 준비
-      images.resize_(images.shape[0], 784) 
+      # images, labels : (torch.Size([16, 1, 28, 28]), torch.Size([16]))
+      # 0. Data를 GPU로 보내기
+      images, labels = images.to(device), labels.to(device)
 
-    # 2. 전방향(forward) 예측
+      # 1. 입력 데이터 준비
+      # not Flatten !!
+      # images.resize_(images.shape[0], 784) 
+
+      # 2. 전방향(forward) 예측
       predict = model(images) # 예측 점수
       loss = loss_fn(predict, labels) # 예측 점수와 정답을 CrossEntropyLoss에 넣어 Loss값 반환
 
-    # 3. 역방향(backward) 오차(Gradient) 전파
+      # 3. 역방향(backward) 오차(Gradient) 전파
       optimizer.zero_grad() # Gradient가 누적되지 않게 하기 위해
       loss.backward() # 모델파리미터들의 Gradient 전파
 
-    # 4. 경사 하강법으로 모델 파라미터 업데이트
+      # 4. 경사 하강법으로 모델 파라미터 업데이트
       optimizer.step() # W <- W -lr*Gradient
 
       train_loss += loss.item()
@@ -528,12 +659,14 @@ def train_loop(model, trainloader, loss_fn, epochs, optimizer):
         # option 1 : valid_loss 모니터링
         # if valid_loss < min_loss: # 바로 이전 epoch의 loss보다 작으면 저장하기
         #   min_loss = valid_loss
-        #   torch.save(model.state_dict(), 'best_checkpoint.pth')      
+        #   best_model_state = deepcopy(model.state_dict())          
+        #   torch.save(best_model_state, 'best_checkpoint.pth')     
         
         # option 2 : valid_accuracy 모니터링      
         if valid_accuracy > max_accuracy : # 바로 이전 epoch의 accuracy보다 크면 저장하기
           max_accuracy = valid_accuracy
-          torch.save(model.state_dict(), 'best_checkpoint.pth')  
+          best_model_state = deepcopy(model.state_dict())          
+          torch.save(best_model_state, 'best_checkpoint.pth')  
         # -------------------------------------------
 
         # Early Stopping (조기 종료)
@@ -564,75 +697,74 @@ epochs = 50
 train_loop(model, trainloader, loss_fn, epochs, optimizer)
 ```
 
-    Epoch : 1/50....... Train Loss : 0.638 Valid Loss : 0.460 Valid Accuracy : 0.835
-    Epoch : 2/50....... Train Loss : 0.497 Valid Loss : 0.425 Valid Accuracy : 0.848
-    Epoch : 3/50....... Train Loss : 0.457 Valid Loss : 0.399 Valid Accuracy : 0.852
-    Epoch : 4/50....... Train Loss : 0.435 Valid Loss : 0.399 Valid Accuracy : 0.859
-    Epoch : 5/50....... Train Loss : 0.419 Valid Loss : 0.379 Valid Accuracy : 0.861
-    Epoch : 6/50....... Train Loss : 0.406 Valid Loss : 0.374 Valid Accuracy : 0.866
-    Epoch : 7/50....... Train Loss : 0.396 Valid Loss : 0.368 Valid Accuracy : 0.865
-    Epoch : 8/50....... Train Loss : 0.386 Valid Loss : 0.371 Valid Accuracy : 0.865
+    Epoch : 1/50....... Train Loss : 0.490 Valid Loss : 0.377 Valid Accuracy : 0.864
+    Epoch : 2/50....... Train Loss : 0.352 Valid Loss : 0.335 Valid Accuracy : 0.880
+    Epoch : 3/50....... Train Loss : 0.318 Valid Loss : 0.289 Valid Accuracy : 0.898
+    Epoch : 4/50....... Train Loss : 0.292 Valid Loss : 0.287 Valid Accuracy : 0.898
+    Epoch : 5/50....... Train Loss : 0.276 Valid Loss : 0.257 Valid Accuracy : 0.914
+    Epoch : 6/50....... Train Loss : 0.265 Valid Loss : 0.242 Valid Accuracy : 0.918
+    Epoch : 7/50....... Train Loss : 0.254 Valid Loss : 0.246 Valid Accuracy : 0.916
     trigger :  1
-    Epoch : 9/50....... Train Loss : 0.376 Valid Loss : 0.359 Valid Accuracy : 0.872
-    Epoch : 10/50....... Train Loss : 0.371 Valid Loss : 0.364 Valid Accuracy : 0.870
-    trigger :  1
-    Epoch : 11/50....... Train Loss : 0.368 Valid Loss : 0.360 Valid Accuracy : 0.870
+    Epoch : 8/50....... Train Loss : 0.249 Valid Loss : 0.248 Valid Accuracy : 0.917
     trigger :  2
-    Epoch : 12/50....... Train Loss : 0.364 Valid Loss : 0.360 Valid Accuracy : 0.873
+    Epoch : 9/50....... Train Loss : 0.238 Valid Loss : 0.244 Valid Accuracy : 0.918
     trigger :  3
-    Epoch : 13/50....... Train Loss : 0.358 Valid Loss : 0.350 Valid Accuracy : 0.874
-    Epoch : 14/50....... Train Loss : 0.352 Valid Loss : 0.347 Valid Accuracy : 0.872
-    Epoch : 15/50....... Train Loss : 0.347 Valid Loss : 0.346 Valid Accuracy : 0.878
-    Epoch : 16/50....... Train Loss : 0.340 Valid Loss : 0.352 Valid Accuracy : 0.875
+    Epoch : 10/50....... Train Loss : 0.231 Valid Loss : 0.234 Valid Accuracy : 0.917
+    Epoch : 11/50....... Train Loss : 0.225 Valid Loss : 0.229 Valid Accuracy : 0.925
+    Epoch : 12/50....... Train Loss : 0.216 Valid Loss : 0.232 Valid Accuracy : 0.919
     trigger :  1
-    Epoch : 17/50....... Train Loss : 0.340 Valid Loss : 0.356 Valid Accuracy : 0.874
+    Epoch : 13/50....... Train Loss : 0.214 Valid Loss : 0.218 Valid Accuracy : 0.925
+    Epoch : 14/50....... Train Loss : 0.211 Valid Loss : 0.243 Valid Accuracy : 0.918
+    trigger :  1
+    Epoch : 15/50....... Train Loss : 0.204 Valid Loss : 0.232 Valid Accuracy : 0.917
     trigger :  2
-    Epoch : 18/50....... Train Loss : 0.334 Valid Loss : 0.350 Valid Accuracy : 0.880
+    Epoch : 16/50....... Train Loss : 0.203 Valid Loss : 0.247 Valid Accuracy : 0.913
     trigger :  3
-    Epoch : 19/50....... Train Loss : 0.335 Valid Loss : 0.348 Valid Accuracy : 0.877
+    Epoch : 17/50....... Train Loss : 0.197 Valid Loss : 0.253 Valid Accuracy : 0.912
     trigger :  4
-    Epoch : 20/50....... Train Loss : 0.330 Valid Loss : 0.349 Valid Accuracy : 0.876
+    Epoch : 18/50....... Train Loss : 0.196 Valid Loss : 0.225 Valid Accuracy : 0.918
     trigger :  5
-    Epoch 00020: reducing learning rate of group 0 to 1.0000e-04.
-    Epoch : 21/50....... Train Loss : 0.306 Valid Loss : 0.331 Valid Accuracy : 0.880
-    Epoch : 22/50....... Train Loss : 0.295 Valid Loss : 0.324 Valid Accuracy : 0.882
-    Epoch : 23/50....... Train Loss : 0.292 Valid Loss : 0.325 Valid Accuracy : 0.886
+    Epoch 00018: reducing learning rate of group 0 to 1.0000e-04.
+    Epoch : 19/50....... Train Loss : 0.174 Valid Loss : 0.212 Valid Accuracy : 0.928
+    Epoch : 20/50....... Train Loss : 0.161 Valid Loss : 0.208 Valid Accuracy : 0.930
+    Epoch : 21/50....... Train Loss : 0.156 Valid Loss : 0.202 Valid Accuracy : 0.931
+    Epoch : 22/50....... Train Loss : 0.157 Valid Loss : 0.198 Valid Accuracy : 0.932
+    Epoch : 23/50....... Train Loss : 0.151 Valid Loss : 0.200 Valid Accuracy : 0.933
     trigger :  1
-    Epoch : 24/50....... Train Loss : 0.292 Valid Loss : 0.324 Valid Accuracy : 0.884
+    Epoch : 24/50....... Train Loss : 0.149 Valid Loss : 0.202 Valid Accuracy : 0.932
     trigger :  2
-    Epoch : 25/50....... Train Loss : 0.287 Valid Loss : 0.326 Valid Accuracy : 0.886
+    Epoch : 25/50....... Train Loss : 0.148 Valid Loss : 0.201 Valid Accuracy : 0.929
     trigger :  3
-    Epoch : 26/50....... Train Loss : 0.287 Valid Loss : 0.322 Valid Accuracy : 0.884
-    Epoch : 27/50....... Train Loss : 0.288 Valid Loss : 0.327 Valid Accuracy : 0.886
+    Epoch : 26/50....... Train Loss : 0.147 Valid Loss : 0.198 Valid Accuracy : 0.933
+    Epoch : 27/50....... Train Loss : 0.144 Valid Loss : 0.201 Valid Accuracy : 0.932
     trigger :  1
-    Epoch : 28/50....... Train Loss : 0.285 Valid Loss : 0.325 Valid Accuracy : 0.884
+    Epoch : 28/50....... Train Loss : 0.143 Valid Loss : 0.199 Valid Accuracy : 0.931
     trigger :  2
-    Epoch : 29/50....... Train Loss : 0.284 Valid Loss : 0.328 Valid Accuracy : 0.885
+    Epoch : 29/50....... Train Loss : 0.144 Valid Loss : 0.195 Valid Accuracy : 0.935
+    Epoch : 30/50....... Train Loss : 0.143 Valid Loss : 0.197 Valid Accuracy : 0.936
+    trigger :  1
+    Epoch : 31/50....... Train Loss : 0.140 Valid Loss : 0.197 Valid Accuracy : 0.932
+    trigger :  2
+    Epoch : 32/50....... Train Loss : 0.139 Valid Loss : 0.194 Valid Accuracy : 0.932
+    Epoch : 33/50....... Train Loss : 0.140 Valid Loss : 0.203 Valid Accuracy : 0.929
+    trigger :  1
+    Epoch : 34/50....... Train Loss : 0.139 Valid Loss : 0.191 Valid Accuracy : 0.937
+    Epoch : 35/50....... Train Loss : 0.135 Valid Loss : 0.192 Valid Accuracy : 0.937
+    trigger :  1
+    Epoch : 36/50....... Train Loss : 0.134 Valid Loss : 0.202 Valid Accuracy : 0.929
+    trigger :  2
+    Epoch : 37/50....... Train Loss : 0.134 Valid Loss : 0.201 Valid Accuracy : 0.931
     trigger :  3
-    Epoch : 30/50....... Train Loss : 0.284 Valid Loss : 0.323 Valid Accuracy : 0.887
+    Epoch : 38/50....... Train Loss : 0.133 Valid Loss : 0.193 Valid Accuracy : 0.935
     trigger :  4
-    Epoch : 31/50....... Train Loss : 0.283 Valid Loss : 0.325 Valid Accuracy : 0.884
+    Epoch : 39/50....... Train Loss : 0.132 Valid Loss : 0.200 Valid Accuracy : 0.930
     trigger :  5
-    Epoch 00031: reducing learning rate of group 0 to 1.0000e-05.
-    Epoch : 32/50....... Train Loss : 0.278 Valid Loss : 0.322 Valid Accuracy : 0.888
+    Epoch 00039: reducing learning rate of group 0 to 1.0000e-05.
+    Epoch : 40/50....... Train Loss : 0.131 Valid Loss : 0.201 Valid Accuracy : 0.931
     trigger :  6
-    Epoch : 33/50....... Train Loss : 0.280 Valid Loss : 0.319 Valid Accuracy : 0.886
-    Epoch : 34/50....... Train Loss : 0.280 Valid Loss : 0.322 Valid Accuracy : 0.887
-    trigger :  1
-    Epoch : 35/50....... Train Loss : 0.280 Valid Loss : 0.324 Valid Accuracy : 0.886
-    trigger :  2
-    Epoch : 36/50....... Train Loss : 0.279 Valid Loss : 0.322 Valid Accuracy : 0.886
-    trigger :  3
-    Epoch : 37/50....... Train Loss : 0.279 Valid Loss : 0.325 Valid Accuracy : 0.886
-    trigger :  4
-    Epoch : 38/50....... Train Loss : 0.277 Valid Loss : 0.322 Valid Accuracy : 0.884
-    trigger :  5
-    Epoch 00038: reducing learning rate of group 0 to 1.0000e-06.
-    Epoch : 39/50....... Train Loss : 0.279 Valid Loss : 0.321 Valid Accuracy : 0.886
-    trigger :  6
-    Epoch : 40/50....... Train Loss : 0.278 Valid Loss : 0.327 Valid Accuracy : 0.887
+    Epoch : 41/50....... Train Loss : 0.129 Valid Loss : 0.207 Valid Accuracy : 0.929
     trigger :  7
-    Epoch : 41/50....... Train Loss : 0.276 Valid Loss : 0.322 Valid Accuracy : 0.887
+    Epoch : 42/50....... Train Loss : 0.130 Valid Loss : 0.193 Valid Accuracy : 0.935
     trigger :  8
     Early Stopping !!!
     Training loop is finished !!
@@ -640,7 +772,7 @@ train_loop(model, trainloader, loss_fn, epochs, optimizer)
 
 
 ```python
-#%load_ext tensorboard
+%load_ext tensorboard
 ```
 
 
@@ -664,42 +796,62 @@ writer.close()
 # testloader에서 미니 배치 가져오기
 test_iter = iter(testloader)
 images, labels = next(test_iter)
+images, labels = images.to(device), labels.to(device)
 print(images.size(), labels.size())
 
 # random한 index로 이미지 한장 준비하기
 rnd_idx = 10
 print(images[rnd_idx].shape, labels[rnd_idx])
-flattend_img = images[rnd_idx].view(1, 784)
+```
+
+    torch.Size([16, 1, 28, 28]) torch.Size([16])
+    torch.Size([1, 28, 28]) tensor(4, device='cuda:0')
+    
+
+
+```python
+images[rnd_idx].shape
+```
+
+
+
+
+    torch.Size([1, 28, 28])
+
+
+
+
+```python
+# not Flatten!
+# flattend_img = images[rnd_idx].view(1, 784)
 
 # 준비된 이미지로 예측하기
 model.eval()
 with torch.no_grad():
-  logit = model(flattend_img)
+  logit = model(images[rnd_idx].unsqueeze(0))
 
 pred = logit.max(dim=1)[1]
 print(pred == labels[rnd_idx]) # True : 잘 예측
 ```
 
-    torch.Size([16, 1, 28, 28]) torch.Size([16])
-    torch.Size([1, 28, 28]) tensor(4)
-    tensor([True])
+    tensor([True], device='cuda:0')
     
 
 
 ```python
-plt.imshow(images[rnd_idx].squeeze(), cmap='gray')
+plt.imshow(images[rnd_idx].squeeze().cpu(), cmap='gray')
 ```
 
 
 
 
-    <matplotlib.image.AxesImage at 0x7fef48f03e80>
+    <matplotlib.image.AxesImage at 0x7fa6a6469970>
 
 
 
 
     
-![png](/assets/images/2023-04-08-Deep Learning 11 (Fashion MNIST in Pytorch (3) 조기 종료, LR Schedule)/output_48_1.png)
+![png](/assets/images/2023-04-10-CNN 2 (Fashion MNIST (2) CNN 성능 개선)/output_54_1.png)
     
 
 
@@ -716,8 +868,13 @@ def evaluation(model, testloader, loss_fn):
   # 전방향 예측을 구할 때는 gradient가 필요가 없음음
   with torch.no_grad():
     for images, labels in testloader: # 이터레이터로부터 next()가 호출되며 미니배치 100개씩을 반환(images, labels)
+      # 0. Data를 GPU로 보내기
+      images, labels = images.to(device), labels.to(device)
+
       # 1. 입력 데이터 준비
-      images.resize_(images.size()[0], 784)
+      # not Flatten
+      # images.resize_(images.size()[0], 784)
+      
       # 2. 전방향(Forward) 예측
       logit = model(images) # 예측 점수
       _, preds = torch.max(logit, 1) # 100개에 대한 최종 예측
@@ -737,7 +894,7 @@ model.eval()
 evaluation(model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.354 Test Accuracy : 0.878
+    Test Loss : 0.214 Test Accuracy : 0.923
     
 
 ## 9. 모델 저장
@@ -761,7 +918,7 @@ model.state_dict().keys()
 
 
 
-    odict_keys(['hidden_linear1.weight', 'hidden_linear1.bias', 'batch_norm1.weight', 'batch_norm1.bias', 'batch_norm1.running_mean', 'batch_norm1.running_var', 'batch_norm1.num_batches_tracked', 'hidden_linear2.weight', 'hidden_linear2.bias', 'batch_norm2.weight', 'batch_norm2.bias', 'batch_norm2.running_mean', 'batch_norm2.running_var', 'batch_norm2.num_batches_tracked', 'ouput_linear.weight', 'ouput_linear.bias'])
+    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block1.1.weight', 'conv_block1.1.bias', 'conv_block1.1.running_mean', 'conv_block1.1.running_var', 'conv_block1.1.num_batches_tracked', 'conv_block2.0.weight', 'conv_block2.0.bias', 'conv_block2.1.weight', 'conv_block2.1.bias', 'conv_block2.1.running_mean', 'conv_block2.1.running_var', 'conv_block2.1.num_batches_tracked', 'conv_block3.0.weight', 'conv_block3.0.bias', 'conv_block3.1.weight', 'conv_block3.1.bias', 'conv_block3.1.running_mean', 'conv_block3.1.running_var', 'conv_block3.1.num_batches_tracked', 'linear1.weight', 'linear1.bias', 'batch_norm.weight', 'batch_norm.bias', 'batch_norm.running_mean', 'batch_norm.running_var', 'batch_norm.num_batches_tracked', 'linear2.weight', 'linear2.bias'])
 
 
 
@@ -784,7 +941,7 @@ last_state_dict.keys()
 
 
 
-    odict_keys(['hidden_linear1.weight', 'hidden_linear1.bias', 'batch_norm1.weight', 'batch_norm1.bias', 'batch_norm1.running_mean', 'batch_norm1.running_var', 'batch_norm1.num_batches_tracked', 'hidden_linear2.weight', 'hidden_linear2.bias', 'batch_norm2.weight', 'batch_norm2.bias', 'batch_norm2.running_mean', 'batch_norm2.running_var', 'batch_norm2.num_batches_tracked', 'ouput_linear.weight', 'ouput_linear.bias'])
+    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block1.1.weight', 'conv_block1.1.bias', 'conv_block1.1.running_mean', 'conv_block1.1.running_var', 'conv_block1.1.num_batches_tracked', 'conv_block2.0.weight', 'conv_block2.0.bias', 'conv_block2.1.weight', 'conv_block2.1.bias', 'conv_block2.1.running_mean', 'conv_block2.1.running_var', 'conv_block2.1.num_batches_tracked', 'conv_block3.0.weight', 'conv_block3.0.bias', 'conv_block3.1.weight', 'conv_block3.1.bias', 'conv_block3.1.running_mean', 'conv_block3.1.running_var', 'conv_block3.1.num_batches_tracked', 'linear1.weight', 'linear1.bias', 'batch_norm.weight', 'batch_norm.bias', 'batch_norm.running_mean', 'batch_norm.running_var', 'batch_norm.num_batches_tracked', 'linear2.weight', 'linear2.bias'])
 
 
 
@@ -792,7 +949,8 @@ last_state_dict.keys()
 ```python
 # 읽어들인 모델 파라미터는 모델 아키텍처에 연결을 시켜줘야 함
 # load_state_dict() 사용
-last_model = FMnist_DNN()
+last_model = FMnist_CNN()
+last_model.to(device)
 last_model.load_state_dict(last_state_dict)
 ```
 
@@ -809,14 +967,15 @@ last_model.eval()
 evaluation(last_model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.349 Test Accuracy : 0.879
+    Test Loss : 0.204 Test Accuracy : 0.929
     
 
 
 ```python
 # valid loss or accuracy 기준 best model
 best_state_dict = torch.load('best_checkpoint.pth')
-best_model = FMnist_DNN()
+best_model = FMnist_CNN()
+best_model.to(device)
 best_model.load_state_dict(best_state_dict)
 ```
 
@@ -830,13 +989,18 @@ best_model.load_state_dict(best_state_dict)
 
 ```python
 best_model.eval()
-evaluation(best_model, testloader, loss_fn)  
+evaluation(best_model, testloader, loss_fn)
 ```
 
-    Test Loss : 0.354 Test Accuracy : 0.876
+    Test Loss : 0.198 Test Accuracy : 0.929
     
 
 
 ```python
+# best_state_dict['conv_block1.0.weight']
+```
 
+
+```python
+# last_state_dict['conv_block1.0.weight']
 ```
