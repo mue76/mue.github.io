@@ -270,7 +270,7 @@ for name, parameter in model.named_parameters():
     ouput_linear.bias torch.Size([10])
     
 
-## 5. 모델 컴파일 (손실함수, 옵티마이저 선택)
+## 5. 모델 설정 (손실함수, 옵티마이저 선택)
 
 
 ```python

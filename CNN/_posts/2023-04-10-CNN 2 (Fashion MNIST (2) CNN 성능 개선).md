@@ -1,5 +1,5 @@
 ---
-tag: [Deep Learning, 딥러닝, pytorch, 파이토치, CNN]
+tag: [Deep Learning, 딥러닝, pytorch, 파이토치, CNN, Fashion MNIST]
 toc: true
 toc_sticky: true
 toc_label: 목차
@@ -402,7 +402,7 @@ for name, parameter in model.named_parameters():
     linear2.bias torch.Size([10])
     
 
-## 5. 모델 컴파일 (손실함수, 옵티마이저 선택)
+## 5. 모델 설정 (손실함수, 옵티마이저 선택)
 
 
 ```python

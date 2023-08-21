@@ -1,12 +1,3 @@
----
-tag: [Deep Learning, 딥러닝, pytorch, 파이토치, CNN, CIFAR10, AlexNet]
-toc: true
-toc_sticky: true
-toc_label: 목차
-author_profile: false
-
----
-
 # 신경망 학습 (CIFAR10 in Pytorch)
 
 
@@ -19,7 +10,7 @@ Image('./images/cifar10.png', width=600)
 
 
     
-![png](/assets/images/2023-04-10-CNN 4 (CIFAR10 (2) AlexNet)/output_1_0.png)
+![png](/assets/images/CNN 3 (CIFAR10 (1) Dataset)/output_1_0.png)
     
 
 
@@ -50,7 +41,7 @@ from copy import deepcopy
 !nvidia-smi
 ```
 
-    Mon Apr 10 05:26:18 2023       
+    Mon Apr 10 02:21:21 2023       
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 525.85.12    Driver Version: 525.85.12    CUDA Version: 12.0     |
     |-------------------------------+----------------------+----------------------+
@@ -58,9 +49,9 @@ from copy import deepcopy
     | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
     |                               |                      |               MIG M. |
     |===============================+======================+======================|
-    |   0  Tesla T4            Off  | 00000000:00:04.0 Off |                    0 |
-    | N/A   51C    P8    10W /  70W |      0MiB / 15360MiB |      0%      Default |
-    |                               |                      |                  N/A |
+    |   0  NVIDIA A100-SXM...  Off  | 00000000:00:04.0 Off |                    0 |
+    | N/A   32C    P0    43W / 400W |      0MiB / 40960MiB |      0%      Default |
+    |                               |                      |             Disabled |
     +-------------------------------+----------------------+----------------------+
                                                                                    
     +-----------------------------------------------------------------------------+
@@ -104,7 +95,7 @@ testset = datasets.CIFAR10('./datasets/', download=True, train=False, transform 
     Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./datasets/cifar-10-python.tar.gz
     
 
-    100%|██████████| 170498071/170498071 [00:10<00:00, 15742754.02it/s]
+    100%|██████████| 170498071/170498071 [00:05<00:00, 32944383.80it/s]
     
 
     Extracting ./datasets/cifar-10-python.tar.gz to ./datasets/
@@ -259,7 +250,7 @@ for i in range(32):
 
 
     
-![png](/assets/images/2023-04-10-CNN 4 (CIFAR10 (2) AlexNet)/output_20_0.png)
+![png](/assets/images/CNN 3 (CIFAR10 (1) Dataset)/output_20_0.png)
     
 
 
@@ -331,28 +322,14 @@ images.size(), labels.size()
 
 ```python
 from IPython.display import Image
-Image('./images/알렉스넷.jpg', width=700)
+Image('./images/cnn architecture 2.png', width=700)
 ```
 
 
 
 
     
-![jpeg](/assets/images/2023-04-10-CNN 4 (CIFAR10 (2) AlexNet)/output_29_0.jpg)
-    
-
-
-
-
-```python
-Image('./images/알렉스넷2.jpg')
-```
-
-
-
-
-    
-![jpeg](/assets/images/2023-04-10-CNN 4 (CIFAR10 (2) AlexNet)/output_30_0.jpg)
+![png](/assets/images/CNN 3 (CIFAR10 (1) Dataset)/output_29_0.png)
     
 
 
@@ -384,6 +361,15 @@ import torch.nn.functional as F # 파이토치에서 제공하는 함수(활성�
 # 3. 적당한 분산으로 골고루 분포가 되어야 함
 ```
 
+**option 4** : nn.Module 서브클래싱하기
+- 파라미터 관리가 필요없는 기능(활성화 함수, ...) 함수형(functional)으로 작성
+- 함수형이란 출력이 입력에 의해 결정
+
+**모델 바뀐점**
+- conv_block 추가
+- batch noramalization 추가
+- drop out 추가
+
 **완전 연결망과 CNN망과의 차이점**
 - 지역 연산
 - 가중치 공유(적은 파라미터)
@@ -391,184 +377,48 @@ import torch.nn.functional as F # 파이토치에서 제공하는 함수(활성�
 
 
 ```python
-images.shape, labels.shape
-```
-
-
-
-
-    (torch.Size([16, 3, 32, 32]), torch.Size([16]))
-
-
-
-
-```python
-Image('./images/알렉스넷2.jpg', width=600)
-```
-
-
-
-
-    
-![jpeg](/assets/images/2023-04-10-CNN 4 (CIFAR10 (2) AlexNet)/output_36_0.jpg)
-    
-
-
-
-**conv block 별 사이즈 확인**
-
-
-```python
-conv_block1 = nn.Sequential(
-                            nn.Conv2d(in_channels=3, out_channels=96, kernel_size=3, stride=1, padding=1),
-                            nn.BatchNorm2d(num_features=96),
-                            nn.ReLU(),
-                            nn.MaxPool2d(kernel_size=3, stride=2)
-                            ) # [16, 96, 15, 15]
-conv_block1_out = conv_block1(images)                                     
-conv_block1_out.shape
-```
-
-
-
-
-    torch.Size([16, 96, 15, 15])
-
-
-
-
-```python
-conv_block2 = nn.Sequential(
-                            nn.Conv2d(in_channels=96, out_channels=256, kernel_size=3, stride=1, padding=1),
-                            nn.BatchNorm2d(num_features=256),                                      
-                            nn.ReLU(),
-                            nn.MaxPool2d(kernel_size=3, stride=2)
-                            ) # [16, 256, 7, 7]
-conv_block2_out = conv_block2(conv_block1_out)                                     
-conv_block2_out.shape                                     
-```
-
-
-
-
-    torch.Size([16, 256, 7, 7])
-
-
-
-
-```python
-conv_block3 = nn.Sequential(
-                            nn.Conv2d(in_channels=256, out_channels=384, kernel_size=3, padding=1),
-                            nn.BatchNorm2d(num_features=384),                                      
-                            nn.ReLU(),                                      
-                            ) # [16, 384, 7, 7] 
-conv_block3_out = conv_block3(conv_block2_out)                                     
-conv_block3_out.shape                                       
-```
-
-
-
-
-    torch.Size([16, 384, 7, 7])
-
-
-
-
-```python
-conv_block4 = nn.Sequential(
-                            nn.Conv2d(in_channels=384, out_channels=384, kernel_size=3, padding=1),
-                            nn.BatchNorm2d(num_features=384),                                      
-                            nn.ReLU(),                                      
-                            ) # [16, 384, 7, 7] 
-conv_block4_out = conv_block4(conv_block3_out)                                     
-conv_block4_out.shape  
-```
-
-
-
-
-    torch.Size([16, 384, 7, 7])
-
-
-
-
-```python
-conv_block5 = nn.Sequential(
-                            nn.Conv2d(in_channels=384, out_channels=256, kernel_size=3, padding=1),
-                            nn.BatchNorm2d(num_features=256),                                      
-                            nn.ReLU(),   
-                            nn.MaxPool2d(kernel_size=3, stride=2)                                   
-                            ) # [16, 256, 3, 3]
-conv_block5_out = conv_block5(conv_block4_out)                                     
-conv_block5_out.shape  
-```
-
-
-
-
-    torch.Size([16, 256, 3, 3])
-
-
-
-
-```python
-class AlexNet(nn.Module):
+class CIFAR10_CNN(nn.Module):
   def __init__(self):
     super().__init__()
     self.conv_block1 = nn.Sequential(
-                                      nn.Conv2d(in_channels=3, out_channels=96, kernel_size=3, stride=1, padding=1),
-                                      nn.BatchNorm2d(num_features=96),
+                                      nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1),
+                                      nn.BatchNorm2d(num_features=32),
                                       nn.ReLU(),
-                                      nn.MaxPool2d(kernel_size=3, stride=2)
-                                     ) # [16, 96, 15, 15]
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 32 x 16 x 16
     self.conv_block2 = nn.Sequential(
-                                      nn.Conv2d(in_channels=96, out_channels=256, kernel_size=3, stride=1, padding=1),
-                                      nn.BatchNorm2d(num_features=256),                                      
+                                      nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1),
+                                      nn.BatchNorm2d(num_features=64),
+                                      nn.Dropout(0.2),
                                       nn.ReLU(),
-                                      nn.MaxPool2d(kernel_size=3, stride=2)
-                                     ) # [16, 256, 7, 7]
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 64 x 8 x 8
 
     self.conv_block3 = nn.Sequential(
-                                      nn.Conv2d(in_channels=256, out_channels=384, kernel_size=3, stride=1, padding=1),
-                                      nn.BatchNorm2d(num_features=384), 
-                                      nn.Dropout(0.1),                                    
-                                      nn.ReLU(),                                      
-                                     ) # [16, 384, 7, 7]     
+                                      nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1),
+                                      nn.BatchNorm2d(num_features=128),
+                                      nn.Dropout(0.4),
+                                      nn.ReLU(),
+                                      nn.MaxPool2d(kernel_size=2, stride=2)
+                                     ) # batch_size x 128 x 4 x 4                                   
 
-    self.conv_block4 = nn.Sequential(
-                                      nn.Conv2d(in_channels=384, out_channels=384, kernel_size=3, stride=1, padding=1),
-                                      nn.BatchNorm2d(num_features=384),  
-                                      nn.Dropout(0.3),                                    
-                                      nn.ReLU(),                                      
-                                     ) # [16, 384, 7, 7]   
-
-    self.conv_block5 = nn.Sequential(
-                                      nn.Conv2d(in_channels=384, out_channels=256, kernel_size=3, stride=1, padding=1),
-                                      nn.BatchNorm2d(num_features=256),
-                                      nn.Dropout(0.1), 
-                                      nn.ReLU(),   
-                                      nn.MaxPool2d(kernel_size=3, stride=2)                                   
-                                     ) # [16, 256, 3, 3]                                                                                                       
-
-    self.linear1 = nn.Linear(in_features=256*3*3, out_features=512)
-    self.batch_norm = nn.BatchNorm1d(num_features=512)
-    self.linear2 = nn.Linear(in_features=512, out_features=10)
+    self.linear1 = nn.Linear(in_features=128*4*4, out_features=128)
+    self.batch_norm = nn.BatchNorm1d(num_features=128)
+    self.linear2 = nn.Linear(in_features=128, out_features=10)
 
   def forward(self, x):
-    x = self.conv_block1(x) 
-    x = self.conv_block2(x) 
-    x = self.conv_block3(x) 
-    x = self.conv_block4(x) 
-    x = self.conv_block5(x) 
+    x = self.conv_block1(x) # batch_size x 32 x 16 x 16
+    x = self.conv_block2(x) # batch_size x 64 x 8 x 8
+    x = self.conv_block3(x) # batch_size x 128 x 4 x 4
     
-    # reshape할 형상 : (batch_size x 256*3*3)
-    # x = x.view(-1, 256*3*3) # option 1 : view
+    # reshape할 형상 : (batch_size x 128*4*4)
+    # x = x.view(-1, 128*4*4) # option 1 : view
     x = torch.flatten(x, 1) # option 2 : flatten 
     # x = x.reshape(x.shape[0], -1) # option 3 : reshape
-    x = F.dropout(x, 0.3)
+
     x = self.linear1(x)
     x = self.batch_norm(x)
-    x = F.dropout(x, 0.1)
+    x = F.dropout(x, 0.5)
     x = F.relu(x)
     x = self.linear2(x)
     return x
@@ -576,7 +426,7 @@ class AlexNet(nn.Module):
 
 
 ```python
-model = AlexNet()
+model = CIFAR10_CNN()
 model.to(device)
 model
 ```
@@ -584,41 +434,30 @@ model
 
 
 
-    AlexNet(
+    CIFAR10_CNN(
       (conv_block1): Sequential(
-        (0): Conv2d(3, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
         (2): ReLU()
-        (3): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
       )
       (conv_block2): Sequential(
-        (0): Conv2d(96, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (2): ReLU()
-        (3): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Dropout(p=0.2, inplace=False)
+        (3): ReLU()
+        (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
       )
       (conv_block3): Sequential(
-        (0): Conv2d(256, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (2): Dropout(p=0.1, inplace=False)
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): Dropout(p=0.4, inplace=False)
         (3): ReLU()
+        (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
       )
-      (conv_block4): Sequential(
-        (0): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (2): Dropout(p=0.3, inplace=False)
-        (3): ReLU()
-      )
-      (conv_block5): Sequential(
-        (0): Conv2d(384, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-        (2): Dropout(p=0.1, inplace=False)
-        (3): ReLU()
-        (4): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
-      )
-      (linear1): Linear(in_features=2304, out_features=512, bias=True)
-      (batch_norm): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-      (linear2): Linear(in_features=512, out_features=10, bias=True)
+      (linear1): Linear(in_features=2048, out_features=128, bias=True)
+      (batch_norm): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (linear2): Linear(in_features=128, out_features=10, bias=True)
     )
 
 
@@ -628,6 +467,26 @@ model
 for name, parameter in model.named_parameters():
   print(name, parameter.size())
 ```
+
+    conv_block1.0.weight torch.Size([32, 3, 3, 3])
+    conv_block1.0.bias torch.Size([32])
+    conv_block1.1.weight torch.Size([32])
+    conv_block1.1.bias torch.Size([32])
+    conv_block2.0.weight torch.Size([64, 32, 3, 3])
+    conv_block2.0.bias torch.Size([64])
+    conv_block2.1.weight torch.Size([64])
+    conv_block2.1.bias torch.Size([64])
+    conv_block3.0.weight torch.Size([128, 64, 3, 3])
+    conv_block3.0.bias torch.Size([128])
+    conv_block3.1.weight torch.Size([128])
+    conv_block3.1.bias torch.Size([128])
+    linear1.weight torch.Size([128, 2048])
+    linear1.bias torch.Size([128])
+    batch_norm.weight torch.Size([128])
+    batch_norm.bias torch.Size([128])
+    linear2.weight torch.Size([10, 128])
+    linear2.bias torch.Size([10])
+    
 
 ## 5. 모델 설정 (손실함수, 옵티마이저 선택)
 
@@ -675,39 +534,32 @@ summary(model, (3, 32, 32))
     ----------------------------------------------------------------
             Layer (type)               Output Shape         Param #
     ================================================================
-                Conv2d-1           [-1, 96, 32, 32]           2,688
-           BatchNorm2d-2           [-1, 96, 32, 32]             192
-                  ReLU-3           [-1, 96, 32, 32]               0
-             MaxPool2d-4           [-1, 96, 15, 15]               0
-                Conv2d-5          [-1, 256, 15, 15]         221,440
-           BatchNorm2d-6          [-1, 256, 15, 15]             512
-                  ReLU-7          [-1, 256, 15, 15]               0
-             MaxPool2d-8            [-1, 256, 7, 7]               0
-                Conv2d-9            [-1, 384, 7, 7]         885,120
-          BatchNorm2d-10            [-1, 384, 7, 7]             768
-              Dropout-11            [-1, 384, 7, 7]               0
-                 ReLU-12            [-1, 384, 7, 7]               0
-               Conv2d-13            [-1, 384, 7, 7]       1,327,488
-          BatchNorm2d-14            [-1, 384, 7, 7]             768
-              Dropout-15            [-1, 384, 7, 7]               0
-                 ReLU-16            [-1, 384, 7, 7]               0
-               Conv2d-17            [-1, 256, 7, 7]         884,992
-          BatchNorm2d-18            [-1, 256, 7, 7]             512
-              Dropout-19            [-1, 256, 7, 7]               0
-                 ReLU-20            [-1, 256, 7, 7]               0
-            MaxPool2d-21            [-1, 256, 3, 3]               0
-               Linear-22                  [-1, 512]       1,180,160
-          BatchNorm1d-23                  [-1, 512]           1,024
-               Linear-24                   [-1, 10]           5,130
+                Conv2d-1           [-1, 32, 32, 32]             896
+           BatchNorm2d-2           [-1, 32, 32, 32]              64
+                  ReLU-3           [-1, 32, 32, 32]               0
+             MaxPool2d-4           [-1, 32, 16, 16]               0
+                Conv2d-5           [-1, 64, 16, 16]          18,496
+           BatchNorm2d-6           [-1, 64, 16, 16]             128
+               Dropout-7           [-1, 64, 16, 16]               0
+                  ReLU-8           [-1, 64, 16, 16]               0
+             MaxPool2d-9             [-1, 64, 8, 8]               0
+               Conv2d-10            [-1, 128, 8, 8]          73,856
+          BatchNorm2d-11            [-1, 128, 8, 8]             256
+              Dropout-12            [-1, 128, 8, 8]               0
+                 ReLU-13            [-1, 128, 8, 8]               0
+            MaxPool2d-14            [-1, 128, 4, 4]               0
+               Linear-15                  [-1, 128]         262,272
+          BatchNorm1d-16                  [-1, 128]             256
+               Linear-17                   [-1, 10]           1,290
     ================================================================
-    Total params: 4,510,794
-    Trainable params: 4,510,794
+    Total params: 357,514
+    Trainable params: 357,514
     Non-trainable params: 0
     ----------------------------------------------------------------
     Input size (MB): 0.01
-    Forward/backward pass size (MB): 5.39
-    Params size (MB): 17.21
-    Estimated Total Size (MB): 22.60
+    Forward/backward pass size (MB): 1.61
+    Params size (MB): 1.36
+    Estimated Total Size (MB): 2.99
     ----------------------------------------------------------------
     
 
@@ -715,52 +567,52 @@ summary(model, (3, 32, 32))
 ```python
 # 첫번째 conv layer의 모델 파라미터 수
 # 필터수 x (필터) + bias
-96 * (3*3*3) + 96
+32 * (3*3*3) + 32
 ```
 
 
 
 
-    2688
+    896
 
 
 
 
 ```python
 # 마지막 출력 feature map의 사이즈
-256 * 3 * 3
+128 * 4 * 4
 ```
 
 
 
 
-    2304
+    2048
 
 
 
 
 ```python
 # linear 1 layer
-2304 * 512 + 512
+2048 * 128 + 128
 ```
 
 
 
 
-    1180160
+    262272
 
 
 
 
 ```python
 # linear 2 layer
-512 * 10 + 10
+128 * 10 + 10
 ```
 
 
 
 
-    5130
+    1290
 
 
 
@@ -910,62 +762,96 @@ def train_loop(model, trainloader, loss_fn, epochs, optimizer):
 
 
 ```python
-epochs = 55
-%time train_loop(model, trainloader, loss_fn, epochs, optimizer)
+epochs = 50
+train_loop(model, trainloader, loss_fn, epochs, optimizer)
 writer.close()
 ```
 
-    Epoch : 1/55....... Train Loss : 1.341 Valid Loss : 1.158 Valid Accuracy : 0.588
-    Epoch : 2/55....... Train Loss : 0.928 Valid Loss : 0.802 Valid Accuracy : 0.717
-    Epoch : 3/55....... Train Loss : 0.767 Valid Loss : 0.686 Valid Accuracy : 0.762
-    Epoch : 4/55....... Train Loss : 0.664 Valid Loss : 0.734 Valid Accuracy : 0.754
+    Epoch : 1/50....... Train Loss : 1.392 Valid Loss : 1.412 Valid Accuracy : 0.483
+    Epoch : 2/50....... Train Loss : 1.090 Valid Loss : 1.187 Valid Accuracy : 0.592
+    Epoch : 3/50....... Train Loss : 0.985 Valid Loss : 1.153 Valid Accuracy : 0.597
+    Epoch : 4/50....... Train Loss : 0.906 Valid Loss : 0.957 Valid Accuracy : 0.669
+    Epoch : 5/50....... Train Loss : 0.855 Valid Loss : 0.955 Valid Accuracy : 0.665
+    Epoch : 6/50....... Train Loss : 0.813 Valid Loss : 0.893 Valid Accuracy : 0.697
+    Epoch : 7/50....... Train Loss : 0.769 Valid Loss : 0.955 Valid Accuracy : 0.667
     trigger :  1
-    Epoch : 5/55....... Train Loss : 0.578 Valid Loss : 0.803 Valid Accuracy : 0.724
+    Epoch : 8/50....... Train Loss : 0.738 Valid Loss : 0.901 Valid Accuracy : 0.688
     trigger :  2
-    Epoch : 6/55....... Train Loss : 0.500 Valid Loss : 0.600 Valid Accuracy : 0.795
-    Epoch : 7/55....... Train Loss : 0.436 Valid Loss : 0.550 Valid Accuracy : 0.820
-    Epoch : 8/55....... Train Loss : 0.387 Valid Loss : 0.515 Valid Accuracy : 0.830
-    Epoch : 9/55....... Train Loss : 0.341 Valid Loss : 0.534 Valid Accuracy : 0.827
-    trigger :  1
-    Epoch : 10/55....... Train Loss : 0.295 Valid Loss : 0.491 Valid Accuracy : 0.837
-    Epoch : 11/55....... Train Loss : 0.261 Valid Loss : 0.560 Valid Accuracy : 0.819
-    trigger :  1
-    Epoch : 12/55....... Train Loss : 0.231 Valid Loss : 0.561 Valid Accuracy : 0.828
-    trigger :  2
-    Epoch : 13/55....... Train Loss : 0.208 Valid Loss : 0.564 Valid Accuracy : 0.828
+    Epoch : 9/50....... Train Loss : 0.709 Valid Loss : 0.943 Valid Accuracy : 0.678
     trigger :  3
-    Epoch : 14/55....... Train Loss : 0.184 Valid Loss : 0.570 Valid Accuracy : 0.831
-    trigger :  4
-    Epoch : 15/55....... Train Loss : 0.161 Valid Loss : 0.580 Valid Accuracy : 0.839
-    trigger :  5
-    Epoch 00015: reducing learning rate of group 0 to 1.0000e-04.
-    Epoch : 16/55....... Train Loss : 0.084 Valid Loss : 0.487 Valid Accuracy : 0.864
-    Epoch : 17/55....... Train Loss : 0.058 Valid Loss : 0.502 Valid Accuracy : 0.868
+    Epoch : 10/50....... Train Loss : 0.681 Valid Loss : 0.805 Valid Accuracy : 0.725
+    Epoch : 11/50....... Train Loss : 0.666 Valid Loss : 0.749 Valid Accuracy : 0.747
+    Epoch : 12/50....... Train Loss : 0.645 Valid Loss : 0.813 Valid Accuracy : 0.723
     trigger :  1
-    Epoch : 18/55....... Train Loss : 0.052 Valid Loss : 0.500 Valid Accuracy : 0.869
+    Epoch : 13/50....... Train Loss : 0.625 Valid Loss : 0.729 Valid Accuracy : 0.752
+    Epoch : 14/50....... Train Loss : 0.617 Valid Loss : 0.734 Valid Accuracy : 0.754
+    trigger :  1
+    Epoch : 15/50....... Train Loss : 0.600 Valid Loss : 0.804 Valid Accuracy : 0.720
     trigger :  2
-    Epoch : 19/55....... Train Loss : 0.044 Valid Loss : 0.528 Valid Accuracy : 0.868
+    Epoch : 16/50....... Train Loss : 0.587 Valid Loss : 0.706 Valid Accuracy : 0.766
+    Epoch : 17/50....... Train Loss : 0.567 Valid Loss : 0.880 Valid Accuracy : 0.704
+    trigger :  1
+    Epoch : 18/50....... Train Loss : 0.568 Valid Loss : 0.682 Valid Accuracy : 0.771
+    Epoch : 19/50....... Train Loss : 0.555 Valid Loss : 0.760 Valid Accuracy : 0.741
+    trigger :  1
+    Epoch : 20/50....... Train Loss : 0.537 Valid Loss : 0.696 Valid Accuracy : 0.770
+    trigger :  2
+    Epoch : 21/50....... Train Loss : 0.527 Valid Loss : 0.691 Valid Accuracy : 0.769
     trigger :  3
-    Epoch : 20/55....... Train Loss : 0.040 Valid Loss : 0.533 Valid Accuracy : 0.869
+    Epoch : 22/50....... Train Loss : 0.523 Valid Loss : 0.667 Valid Accuracy : 0.779
+    Epoch : 23/50....... Train Loss : 0.509 Valid Loss : 0.707 Valid Accuracy : 0.759
+    trigger :  1
+    Epoch : 24/50....... Train Loss : 0.512 Valid Loss : 0.715 Valid Accuracy : 0.766
+    trigger :  2
+    Epoch : 25/50....... Train Loss : 0.494 Valid Loss : 0.647 Valid Accuracy : 0.786
+    Epoch : 26/50....... Train Loss : 0.495 Valid Loss : 0.672 Valid Accuracy : 0.776
+    trigger :  1
+    Epoch : 27/50....... Train Loss : 0.484 Valid Loss : 0.652 Valid Accuracy : 0.779
+    trigger :  2
+    Epoch : 28/50....... Train Loss : 0.485 Valid Loss : 0.713 Valid Accuracy : 0.765
+    trigger :  3
+    Epoch : 29/50....... Train Loss : 0.469 Valid Loss : 0.671 Valid Accuracy : 0.771
     trigger :  4
-    Epoch : 21/55....... Train Loss : 0.034 Valid Loss : 0.551 Valid Accuracy : 0.868
+    Epoch : 30/50....... Train Loss : 0.469 Valid Loss : 0.653 Valid Accuracy : 0.784
     trigger :  5
-    Epoch 00021: reducing learning rate of group 0 to 1.0000e-05.
-    Epoch : 22/55....... Train Loss : 0.028 Valid Loss : 0.536 Valid Accuracy : 0.874
+    Epoch 00030: reducing learning rate of group 0 to 1.0000e-04.
+    Epoch : 31/50....... Train Loss : 0.412 Valid Loss : 0.612 Valid Accuracy : 0.795
+    Epoch : 32/50....... Train Loss : 0.401 Valid Loss : 0.619 Valid Accuracy : 0.793
+    trigger :  1
+    Epoch : 33/50....... Train Loss : 0.384 Valid Loss : 0.601 Valid Accuracy : 0.801
+    Epoch : 34/50....... Train Loss : 0.381 Valid Loss : 0.614 Valid Accuracy : 0.794
+    trigger :  1
+    Epoch : 35/50....... Train Loss : 0.372 Valid Loss : 0.593 Valid Accuracy : 0.803
+    Epoch : 36/50....... Train Loss : 0.368 Valid Loss : 0.601 Valid Accuracy : 0.797
+    trigger :  1
+    Epoch : 37/50....... Train Loss : 0.365 Valid Loss : 0.596 Valid Accuracy : 0.800
+    trigger :  2
+    Epoch : 38/50....... Train Loss : 0.361 Valid Loss : 0.586 Valid Accuracy : 0.807
+    Epoch : 39/50....... Train Loss : 0.358 Valid Loss : 0.580 Valid Accuracy : 0.811
+    Epoch : 40/50....... Train Loss : 0.357 Valid Loss : 0.588 Valid Accuracy : 0.802
+    trigger :  1
+    Epoch : 41/50....... Train Loss : 0.356 Valid Loss : 0.591 Valid Accuracy : 0.802
+    trigger :  2
+    Epoch : 42/50....... Train Loss : 0.350 Valid Loss : 0.587 Valid Accuracy : 0.805
+    trigger :  3
+    Epoch : 43/50....... Train Loss : 0.350 Valid Loss : 0.589 Valid Accuracy : 0.807
+    trigger :  4
+    Epoch : 44/50....... Train Loss : 0.349 Valid Loss : 0.621 Valid Accuracy : 0.789
+    trigger :  5
+    Epoch 00044: reducing learning rate of group 0 to 1.0000e-05.
+    Epoch : 45/50....... Train Loss : 0.344 Valid Loss : 0.592 Valid Accuracy : 0.805
     trigger :  6
-    Epoch : 23/55....... Train Loss : 0.028 Valid Loss : 0.559 Valid Accuracy : 0.870
+    Epoch : 46/50....... Train Loss : 0.340 Valid Loss : 0.589 Valid Accuracy : 0.801
     trigger :  7
-    Epoch : 24/55....... Train Loss : 0.028 Valid Loss : 0.544 Valid Accuracy : 0.872
+    Epoch : 47/50....... Train Loss : 0.341 Valid Loss : 0.583 Valid Accuracy : 0.807
     trigger :  8
     Early Stopping !!!
     Training loop is finished !!
-    CPU times: user 10min 55s, sys: 5.11 s, total: 11min
-    Wall time: 10min 57s
     
 
 
 ```python
-# %load_ext tensorboard
+%load_ext tensorboard
 ```
 
 
@@ -1022,7 +908,7 @@ pred = logit.max(dim=1)[1]
 print(pred == labels[rnd_idx]) # True : 잘 예측
 ```
 
-    tensor([True], device='cuda:0')
+    tensor([False], device='cuda:0')
     
 
 
@@ -1032,20 +918,20 @@ print(labels_map[pred.cpu().item()], labels_map[labels[rnd_idx].cpu().item()])
 plt.imshow(images[rnd_idx].permute(1, 2, 0).cpu())
 ```
 
-    pred: tensor([0], device='cuda:0') labels: tensor(0, device='cuda:0')
-    airplane airplane
+    pred: tensor([5], device='cuda:0') labels: tensor(0, device='cuda:0')
+    dog airplane
     
 
 
 
 
-    <matplotlib.image.AxesImage at 0x7f93c5bac4f0>
+    <matplotlib.image.AxesImage at 0x7f6fae2e0490>
 
 
 
 
     
-![png](/assets/images/2023-04-10-CNN 4 (CIFAR10 (2) AlexNet)/output_67_2.png)
+![png](/assets/images/CNN 3 (CIFAR10 (1) Dataset)/output_60_2.png)
     
 
 
@@ -1088,7 +974,7 @@ model.eval()
 evaluation(model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.555 Test Accuracy : 0.864
+    Test Loss : 0.590 Test Accuracy : 0.806
     
 
 ## 9. 모델 저장
@@ -1112,7 +998,7 @@ model.state_dict().keys()
 
 
 
-    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block1.1.weight', 'conv_block1.1.bias', 'conv_block1.1.running_mean', 'conv_block1.1.running_var', 'conv_block1.1.num_batches_tracked', 'conv_block2.0.weight', 'conv_block2.0.bias', 'conv_block2.1.weight', 'conv_block2.1.bias', 'conv_block2.1.running_mean', 'conv_block2.1.running_var', 'conv_block2.1.num_batches_tracked', 'conv_block3.0.weight', 'conv_block3.0.bias', 'conv_block3.1.weight', 'conv_block3.1.bias', 'conv_block3.1.running_mean', 'conv_block3.1.running_var', 'conv_block3.1.num_batches_tracked', 'conv_block4.0.weight', 'conv_block4.0.bias', 'conv_block4.1.weight', 'conv_block4.1.bias', 'conv_block4.1.running_mean', 'conv_block4.1.running_var', 'conv_block4.1.num_batches_tracked', 'conv_block5.0.weight', 'conv_block5.0.bias', 'conv_block5.1.weight', 'conv_block5.1.bias', 'conv_block5.1.running_mean', 'conv_block5.1.running_var', 'conv_block5.1.num_batches_tracked', 'linear1.weight', 'linear1.bias', 'batch_norm.weight', 'batch_norm.bias', 'batch_norm.running_mean', 'batch_norm.running_var', 'batch_norm.num_batches_tracked', 'linear2.weight', 'linear2.bias'])
+    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block1.1.weight', 'conv_block1.1.bias', 'conv_block1.1.running_mean', 'conv_block1.1.running_var', 'conv_block1.1.num_batches_tracked', 'conv_block2.0.weight', 'conv_block2.0.bias', 'conv_block2.1.weight', 'conv_block2.1.bias', 'conv_block2.1.running_mean', 'conv_block2.1.running_var', 'conv_block2.1.num_batches_tracked', 'conv_block3.0.weight', 'conv_block3.0.bias', 'conv_block3.1.weight', 'conv_block3.1.bias', 'conv_block3.1.running_mean', 'conv_block3.1.running_var', 'conv_block3.1.num_batches_tracked', 'linear1.weight', 'linear1.bias', 'batch_norm.weight', 'batch_norm.bias', 'batch_norm.running_mean', 'batch_norm.running_var', 'batch_norm.num_batches_tracked', 'linear2.weight', 'linear2.bias'])
 
 
 
@@ -1135,7 +1021,7 @@ last_state_dict.keys()
 
 
 
-    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block1.1.weight', 'conv_block1.1.bias', 'conv_block1.1.running_mean', 'conv_block1.1.running_var', 'conv_block1.1.num_batches_tracked', 'conv_block2.0.weight', 'conv_block2.0.bias', 'conv_block2.1.weight', 'conv_block2.1.bias', 'conv_block2.1.running_mean', 'conv_block2.1.running_var', 'conv_block2.1.num_batches_tracked', 'conv_block3.0.weight', 'conv_block3.0.bias', 'conv_block3.1.weight', 'conv_block3.1.bias', 'conv_block3.1.running_mean', 'conv_block3.1.running_var', 'conv_block3.1.num_batches_tracked', 'conv_block4.0.weight', 'conv_block4.0.bias', 'conv_block4.1.weight', 'conv_block4.1.bias', 'conv_block4.1.running_mean', 'conv_block4.1.running_var', 'conv_block4.1.num_batches_tracked', 'conv_block5.0.weight', 'conv_block5.0.bias', 'conv_block5.1.weight', 'conv_block5.1.bias', 'conv_block5.1.running_mean', 'conv_block5.1.running_var', 'conv_block5.1.num_batches_tracked', 'linear1.weight', 'linear1.bias', 'batch_norm.weight', 'batch_norm.bias', 'batch_norm.running_mean', 'batch_norm.running_var', 'batch_norm.num_batches_tracked', 'linear2.weight', 'linear2.bias'])
+    odict_keys(['conv_block1.0.weight', 'conv_block1.0.bias', 'conv_block1.1.weight', 'conv_block1.1.bias', 'conv_block1.1.running_mean', 'conv_block1.1.running_var', 'conv_block1.1.num_batches_tracked', 'conv_block2.0.weight', 'conv_block2.0.bias', 'conv_block2.1.weight', 'conv_block2.1.bias', 'conv_block2.1.running_mean', 'conv_block2.1.running_var', 'conv_block2.1.num_batches_tracked', 'conv_block3.0.weight', 'conv_block3.0.bias', 'conv_block3.1.weight', 'conv_block3.1.bias', 'conv_block3.1.running_mean', 'conv_block3.1.running_var', 'conv_block3.1.num_batches_tracked', 'linear1.weight', 'linear1.bias', 'batch_norm.weight', 'batch_norm.bias', 'batch_norm.running_mean', 'batch_norm.running_var', 'batch_norm.num_batches_tracked', 'linear2.weight', 'linear2.bias'])
 
 
 
@@ -1143,7 +1029,7 @@ last_state_dict.keys()
 ```python
 # 읽어들인 모델 파라미터는 모델 아키텍처에 연결을 시켜줘야 함
 # load_state_dict() 사용
-last_model = AlexNet()
+last_model = CIFAR10_CNN()
 last_model.to(device)
 last_model.load_state_dict(last_state_dict)
 ```
@@ -1161,14 +1047,14 @@ last_model.eval()
 evaluation(last_model, testloader, loss_fn)  
 ```
 
-    Test Loss : 0.562 Test Accuracy : 0.865
+    Test Loss : 0.594 Test Accuracy : 0.803
     
 
 
 ```python
 # valid loss or accuracy 기준 best model
 best_state_dict = torch.load('best_checkpoint.pth')
-best_model = AlexNet()
+best_model = CIFAR10_CNN()
 best_model.to(device)
 best_model.load_state_dict(best_state_dict)
 ```
@@ -1186,17 +1072,17 @@ best_model.eval()
 evaluation(best_model, testloader, loss_fn)
 ```
 
-    Test Loss : 0.549 Test Accuracy : 0.869
+    Test Loss : 0.593 Test Accuracy : 0.804
     
 
 
 ```python
-#best_state_dict['conv_block1.0.weight']
+# best_state_dict['conv_block1.0.weight']
 ```
 
 
 ```python
-#last_state_dict['conv_block1.0.weight']
+# last_state_dict['conv_block1.0.weight']
 ```
 
 
