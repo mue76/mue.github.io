@@ -9,7 +9,7 @@ main:
   - title: "Search"
     url: /search/
   - title: "About Me"
-    url: /소개(about)/
+    url: /소개(about-me)/
 
 
 counts:
