@@ -577,7 +577,5 @@ cv2.destroyAllWindows()
     (196608, 1)
     
 
-
-```python
-
-```
+## Reference
+- [OpenCV 4로 배우는 컴퓨터 비전과 머신 러닝 (황선규 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=187822936)

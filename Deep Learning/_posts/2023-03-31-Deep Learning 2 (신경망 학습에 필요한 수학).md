@@ -398,3 +398,5 @@ dW # net.W 의 편미분 행렬
            [ 0.36074824,  0.25436094, -0.61510918]])
 
 
+## Reference
+- [밑바닥부터 시작하는 딥러닝 1 (사이토 고키 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=99518713)

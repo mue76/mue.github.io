@@ -128,3 +128,5 @@ hog_image.shape
     (128, 64)
 
 
+## Reference
+- [OpenCV 4로 배우는 컴퓨터 비전과 머신 러닝 (황선규 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=187822936)

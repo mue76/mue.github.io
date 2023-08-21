@@ -2144,3 +2144,7 @@ for epoch in range(epochs):
   loss.backward() # gradient를 역방향으로 계산
   optimizer.step() # 경사하강법 적용 (W(new) <- W(old) -lr*gradient)
 ```
+
+
+## Reference
+- [파이토치 딥러닝 마스터 (엘리 스티븐스,루카 안티가,토마스 피이만 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=296883495)

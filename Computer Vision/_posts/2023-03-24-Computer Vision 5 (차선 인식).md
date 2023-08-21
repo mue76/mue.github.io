@@ -31,7 +31,8 @@ plt.imshow(image)
     <matplotlib.image.AxesImage at 0x1c94b3baf10>
 
 
-
+## Reference
+- Udacity - Self-Driving Car NanoDegree
 
     
 ![png](/assets/images/2023-03-24-Computer Vision 5 (차선 인식)/output_3_1.png)

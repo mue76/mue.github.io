@@ -1818,20 +1818,8 @@ print(images[rnd_idx].shape, labels[rnd_idx])
 ```
 
     torch.Size([4, 3, 224, 224]) torch.Size([4])
+    torch.Size([3, 224, 224]) tensor(0, device='cuda:0')
     
-
-
-    ---------------------------------------------------------------------------
-
-    IndexError                                Traceback (most recent call last)
-
-    <ipython-input-99-96e05baa1841> in <cell line: 9>()
-          7 # random한 index로 이미지 한장 준비하기
-          8 rnd_idx = 10
-    ----> 9 print(images[rnd_idx].shape, labels[rnd_idx])
-    
-
-    IndexError: index 10 is out of bounds for dimension 0 with size 4
 
 
 
@@ -1839,17 +1827,7 @@ print(images[rnd_idx].shape, labels[rnd_idx])
 images[rnd_idx].shape
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    IndexError                                Traceback (most recent call last)
-
-    <ipython-input-100-81630fd2f131> in <cell line: 1>()
-    ----> 1 images[rnd_idx].shape
-    
-
-    IndexError: index 10 is out of bounds for dimension 0 with size 4
-
+    torch.Size([3, 224, 224])
 
 
 ```python
@@ -1873,17 +1851,6 @@ plt.imshow(images[rnd_idx].permute(1, 2, 0).cpu())
 ```
 
 
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-101-3b818cac3b8f> in <cell line: 1>()
-    ----> 1 print("pred:", pred, "labels:", labels[rnd_idx])
-          2 print(labels_map[pred.cpu().item()], labels_map[labels[rnd_idx].cpu().item()])
-          3 plt.imshow(images[rnd_idx].permute(1, 2, 0).cpu())
-    
-
-    NameError: name 'pred' is not defined
 
 
 ## 8. 모델 평가

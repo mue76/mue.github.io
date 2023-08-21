@@ -1072,3 +1072,5 @@ get_prediction()
 
     A man on a snowboard in the snow .
     
+## Reference
+- Udacity - Computer Vision NanoDegree

@@ -1585,6 +1585,5 @@ evaluation(best_model, testloader, loss_fn)
 ```
 
 
-```python
-
-```
+## Reference
+- [딥러닝 파이토치 교과서 (서지영 저)](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=289661077)
